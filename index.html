@@ -7,228 +7,334 @@
 
 <style>
 :root {
-  --gold: #d9ad48;
-  --bg: #080808;
-  --card: #151515;
-  --muted: #999;
-  --green: #21c784;
-  --red: #ff5c66;
+  --gold:#d9ad48;
+  --bg:#080808;
+  --card:#151515;
+  --muted:#999;
+  --green:#21c784;
+  --red:#ff5c66;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body {
-  background: var(--bg);
-  color: white;
-  font-family: Arial, sans-serif;
+  background:var(--bg);
+  color:white;
+  font-family:Arial,sans-serif;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 22px 7%;
-  border-bottom: 1px solid #252525;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 7%;
+  border-bottom:1px solid #252525;
+  flex-wrap:wrap;
+  gap:15px;
 }
 
 .logo {
-  color: var(--gold);
-  font-size: 27px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  color:var(--gold);
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+nav {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 25px;
-  font-size: 14px;
+  color:white;
+  text-decoration:none;
+  font-size:14px;
 }
 
 nav a:hover {
-  color: var(--gold);
+  color:var(--gold);
+}
+
+button,.button {
+  cursor:pointer;
+  border:none;
+  border-radius:5px;
+  padding:13px 22px;
+  background:var(--gold);
+  color:#080808;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+button:hover,.button:hover {
+  opacity:.85;
 }
 
 .hero {
-  padding: 75px 7%;
-  text-align: center;
+  padding:75px 7%;
+  text-align:center;
 }
 
 .hero h1 {
-  font-size: clamp(38px, 7vw, 70px);
-  margin-bottom: 20px;
+  font-size:clamp(38px,7vw,70px);
+  margin-bottom:20px;
 }
 
 .hero h1 span {
-  color: var(--gold);
+  color:var(--gold);
 }
 
 .hero p {
-  color: var(--muted);
-  max-width: 600px;
-  margin: auto;
-  line-height: 1.7;
-}
-
-.button {
-  display: inline-block;
-  margin-top: 28px;
-  padding: 15px 30px;
-  background: var(--gold);
-  color: #080808;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
+  color:var(--muted);
+  max-width:600px;
+  margin:auto;
+  line-height:1.7;
 }
 
 .section {
-  padding: 45px 7%;
+  padding:45px 7%;
 }
 
 .section-title {
-  margin-bottom: 25px;
-  font-size: 27px;
+  margin-bottom:25px;
+  font-size:27px;
 }
 
 .section-title span {
-  color: var(--gold);
+  color:var(--gold);
+}
+
+.auth-container {
+  max-width:450px;
+  margin:30px auto;
+  padding:30px;
+  background:var(--card);
+  border:1px solid #333;
+  border-radius:12px;
+}
+
+.auth-container h2 {
+  margin-bottom:20px;
+}
+
+.auth-container input {
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  background:#080808;
+  color:white;
+  border:1px solid #333;
+  border-radius:5px;
+  outline:none;
+}
+
+.auth-container input:focus {
+  border-color:var(--gold);
+}
+
+.auth-container button {
+  width:100%;
+  margin-top:15px;
+}
+
+.auth-tabs {
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.auth-tabs button {
+  background:#292929;
+  color:white;
+}
+
+.auth-tabs button.active {
+  background:var(--gold);
+  color:black;
+}
+
+.auth-message {
+  margin-top:15px;
+  color:var(--gold);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.dashboard {
+  max-width:850px;
+  margin:30px auto;
+  padding:30px;
+  background:var(--card);
+  border:1px solid #333;
+  border-radius:12px;
+}
+
+.dashboard h2 {
+  color:var(--gold);
+  margin-bottom:20px;
+}
+
+.profile-card {
+  background:#080808;
+  padding:20px;
+  border-radius:8px;
+  margin:15px 0;
+  line-height:2;
+}
+
+.dashboard-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin:20px 0;
+}
+
+.dashboard-box {
+  padding:20px;
+  background:#080808;
+  border-radius:8px;
+}
+
+.dashboard-box h3 {
+  color:var(--gold);
+  margin-bottom:10px;
 }
 
 .market-info {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-bottom: 25px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
 }
 
 .market-info div {
-  background: var(--card);
-  padding: 18px;
-  border-radius: 8px;
-  flex: 1;
-  min-width: 130px;
+  background:var(--card);
+  padding:18px;
+  border-radius:8px;
+  flex:1;
+  min-width:130px;
 }
 
 .market-info small {
-  color: var(--muted);
+  color:var(--muted);
 }
 
 .market-info h3 {
-  margin-top: 9px;
-  color: var(--gold);
+  margin-top:9px;
+  color:var(--gold);
 }
 
 .table-wrap {
-  overflow-x: auto;
-  background: var(--card);
-  border-radius: 10px;
+  overflow-x:auto;
+  background:var(--card);
+  border-radius:10px;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 650px;
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
 }
 
-th, td {
-  padding: 18px 15px;
-  text-align: left;
-  border-bottom: 1px solid #292929;
+th,td {
+  padding:18px 15px;
+  text-align:left;
+  border-bottom:1px solid #292929;
 }
 
 th {
-  color: var(--gold);
-  font-size: 13px;
+  color:var(--gold);
+  font-size:13px;
 }
 
 td {
-  font-size: 14px;
+  font-size:14px;
 }
 
 .coin {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:bold;
 }
 
 .coin img {
-  width: 30px;
-  height: 30px;
+  width:30px;
+  height:30px;
 }
 
 .symbol {
-  color: var(--muted);
-  margin-left: 5px;
-  text-transform: uppercase;
+  color:var(--muted);
+  margin-left:5px;
+  text-transform:uppercase;
 }
 
 .positive {
-  color: var(--green);
+  color:var(--green);
 }
 
 .negative {
-  color: var(--red);
+  color:var(--red);
 }
 
 .status {
-  color: var(--muted);
-  margin-bottom: 15px;
-  font-size: 13px;
+  color:var(--muted);
+  margin-bottom:15px;
+  font-size:13px;
 }
 
 .features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
 .feature {
-  background: var(--card);
-  padding: 25px;
-  border-radius: 9px;
-  border: 1px solid #282828;
+  background:var(--card);
+  padding:25px;
+  border-radius:9px;
+  border:1px solid #282828;
 }
 
 .feature h3 {
-  color: var(--gold);
-  margin-bottom: 12px;
+  color:var(--gold);
+  margin-bottom:12px;
 }
 
 .feature p {
-  color: var(--muted);
-  line-height: 1.6;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.hidden {
+  display:none !important;
 }
 
 footer {
-  text-align: center;
-  padding: 35px 15px;
-  border-top: 1px solid #252525;
-  color: var(--muted);
-  margin-top: 40px;
+  text-align:center;
+  padding:35px 15px;
+  border-top:1px solid #252525;
+  color:var(--muted);
+  margin-top:40px;
 }
 
-@media(max-width: 600px) {
+@media(max-width:600px) {
   header {
-    padding: 18px 5%;
+    padding:18px 5%;
   }
 
-  nav a {
-    margin-left: 10px;
-    font-size: 12px;
+  .hero,.section {
+    padding:40px 5%;
   }
 
-  .hero {
-    padding: 60px 5%;
-  }
-
-  .section {
-    padding: 35px 5%;
+  .auth-container,.dashboard {
+    padding:20px;
   }
 }
 </style>
@@ -243,11 +349,14 @@ footer {
     <a href="#home">Home</a>
     <a href="#markets">Markets</a>
     <a href="#features">Features</a>
+    <a href="#account">Account</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <h1>Trade Crypto.<br><span>Beyond Limits.</span></h1>
+
+  <h1>Trade Crypto.<br>
+  <span>Beyond Limits.</span></h1>
 
   <p>
     Discover cryptocurrency markets, monitor live prices
@@ -255,16 +364,153 @@ footer {
     Buy. Sell. Trade. Beyond Limits.
   </p>
 
-  <a href="#markets" class="button">Explore Markets</a>
+  <a href="#account" class="button">Get Started</a>
+
 </section>
+
+<!-- ACCOUNT SECTION -->
+
+<section class="section" id="account">
+
+  <div class="auth-container" id="authContainer">
+
+    <h2>Welcome to VELTRO</h2>
+
+    <div class="auth-tabs">
+
+      <button id="loginTab" class="active"
+        type="button" onclick="showLogin()">
+        Login
+      </button>
+
+      <button id="registerTab"
+        type="button" onclick="showRegister()">
+        Register
+      </button>
+
+    </div>
+
+    <!-- LOGIN FORM -->
+
+    <form id="loginForm">
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email address"
+        autocomplete="email"
+        required>
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+        autocomplete="current-password"
+        required>
+
+      <button type="submit" id="loginButton">
+        Login to VELTRO
+      </button>
+
+    </form>
+
+    <!-- REGISTER FORM -->
+
+    <form id="registerForm" class="hidden">
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Full name"
+        maxlength="100"
+        autocomplete="name"
+        required>
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email address"
+        autocomplete="email"
+        required>
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Create password (minimum 8 characters)"
+        minlength="8"
+        maxlength="72"
+        autocomplete="new-password"
+        required>
+
+      <button type="submit" id="registerButton">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="auth-message" id="authMessage"
+       role="status" aria-live="polite"></p>
+
+  </div>
+
+  <!-- PERSONAL DASHBOARD -->
+
+  <div class="dashboard hidden" id="dashboard">
+
+    <h2>Welcome to your dashboard!</h2>
+
+    <p>You are successfully logged into VELTRO.</p>
+
+    <div class="profile-card">
+
+      <h3>My Profile</h3>
+
+      <p>Name: <span id="profileName"></span></p>
+
+      <p>Email: <span id="profileEmail"></span></p>
+
+      <p>Account ID: <span id="profileId"></span></p>
+
+      <p>Member Since: <span id="profileDate"></span></p>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+      <div class="dashboard-box">
+        <h3>Account Status</h3>
+        <p>Registered</p>
+      </div>
+
+      <div class="dashboard-box">
+        <h3>Market Access</h3>
+        <p>Available</p>
+      </div>
+
+    </div>
+
+    <button onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+</section>
+
+<!-- MARKET SECTION -->
 
 <section class="section" id="markets">
 
-  <h2 class="section-title">Live Crypto <span>Markets</span></h2>
+  <h2 class="section-title">
+    Live Crypto <span>Markets</span>
+  </h2>
 
-  <p class="status" id="status">Connecting to cryptocurrency markets...</p>
+  <p class="status" id="status">
+    Connecting to cryptocurrency markets...
+  </p>
 
   <div class="market-info">
+
     <div>
       <small>Bitcoin Price</small>
       <h3 id="bitcoinPrice">Loading...</h3>
@@ -279,10 +525,13 @@ footer {
       <small>Assets Displayed</small>
       <h3 id="assetCount">Loading...</h3>
     </div>
+
   </div>
 
   <div class="table-wrap">
+
     <table>
+
       <thead>
         <tr>
           <th>#</th>
@@ -295,17 +544,28 @@ footer {
       </thead>
 
       <tbody id="coinTable">
+
         <tr>
-          <td colspan="6">Loading cryptocurrency data...</td>
+          <td colspan="6">
+            Loading cryptocurrency data...
+          </td>
         </tr>
+
       </tbody>
+
     </table>
+
   </div>
 
 </section>
 
+<!-- FEATURES -->
+
 <section class="section" id="features">
-  <h2 class="section-title">Why <span>VELTRO?</span></h2>
+
+  <h2 class="section-title">
+    Why <span>VELTRO?</span>
+  </h2>
 
   <div class="features">
 
@@ -320,68 +580,356 @@ footer {
     </div>
 
     <div class="feature">
-      <h3>Simple Experience</h3>
-      <p>Enjoy a clean and easy-to-use cryptocurrency interface.</p>
+      <h3>Personal Accounts</h3>
+      <p>Create your account and access your personal dashboard.</p>
     </div>
 
   </div>
+
 </section>
 
 <footer>
+
   <div class="logo">VELTRO</div>
+
   <p>Buy. Sell. Trade. Beyond Limits.</p>
+
   <br>
+
   <p>Market data powered by CoinGecko.</p>
+
   <br>
-  <p>Cryptocurrency investments involve risk. Prices can rise or fall.</p>
+
+  <p>Cryptocurrency investments involve risk.</p>
+
   <br>
+
   &copy; 2026 VELTRO. All rights reserved.
+
 </footer>
 
 <script>
-const API_URL = "https://veltro-api.onrender.com/api/coins";
+
+// VELTRO API CONFIGURATION
+
+const API_BASE = "https://veltro-api.onrender.com";
+
+const API_URL = API_BASE + "/api/coins";
+
+let authToken = localStorage.getItem("veltro_token");
+
+// HTML ESCAPING
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+// AUTHENTICATION TABS
+
+function showLogin() {
+
+  document.getElementById("loginForm").classList.remove("hidden");
+
+  document.getElementById("registerForm").classList.add("hidden");
+
+  document.getElementById("loginTab").classList.add("active");
+
+  document.getElementById("registerTab").classList.remove("active");
+
+  document.getElementById("authMessage").textContent = "";
+
+}
+
+function showRegister() {
+
+  document.getElementById("registerForm").classList.remove("hidden");
+
+  document.getElementById("loginForm").classList.add("hidden");
+
+  document.getElementById("registerTab").classList.add("active");
+
+  document.getElementById("loginTab").classList.remove("active");
+
+  document.getElementById("authMessage").textContent = "";
+
+}
+
+// AUTHENTICATION REQUEST
+
+async function authRequest(endpoint, data) {
+
+  const response = await fetch(API_BASE + endpoint, {
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify(data)
+
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || "Authentication failed.");
+  }
+
+  if (!result.token) {
+    throw new Error("Authentication token was not returned.");
+  }
+
+  return result;
+
+}
+
+// REGISTER
+
+document.getElementById("registerForm").addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    const button = document.getElementById("registerButton");
+
+    const message = document.getElementById("authMessage");
+
+    button.disabled = true;
+    button.textContent = "Creating Account...";
+
+    try {
+
+      const result = await authRequest(
+        "/api/auth/register",
+        {
+          name:document.getElementById("registerName").value,
+          email:document.getElementById("registerEmail").value,
+          password:document.getElementById("registerPassword").value
+        }
+      );
+
+      authToken = result.token;
+
+      localStorage.setItem("veltro_token", authToken);
+
+      document.getElementById("registerForm").reset();
+
+      await loadDashboard();
+
+      message.textContent = "";
+
+      alert("Welcome to VELTRO! Your account has been created.");
+
+    } catch(error) {
+
+      message.textContent = error.message;
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "Create Account";
+
+    }
+
+  }
+);
+
+// LOGIN
+
+document.getElementById("loginForm").addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    const button = document.getElementById("loginButton");
+
+    const message = document.getElementById("authMessage");
+
+    button.disabled = true;
+    button.textContent = "Logging in...";
+
+    try {
+
+      const result = await authRequest(
+        "/api/auth/login",
+        {
+          email:document.getElementById("loginEmail").value,
+          password:document.getElementById("loginPassword").value
+        }
+      );
+
+      authToken = result.token;
+
+      localStorage.setItem("veltro_token", authToken);
+
+      document.getElementById("loginForm").reset();
+
+      await loadDashboard();
+
+      message.textContent = "";
+
+      alert("Login successful! Welcome back.");
+
+    } catch(error) {
+
+      message.textContent = error.message;
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "Login to VELTRO";
+
+    }
+
+  }
+);
+
+// LOAD PERSONAL DASHBOARD
+
+async function loadDashboard() {
+
+  if (!authToken) return;
+
+  try {
+
+    const response = await fetch(
+      API_BASE + "/api/auth/me",
+      {
+        headers:{
+          "Authorization":"Bearer " + authToken
+        }
+      }
+    );
+
+    if (!response.ok) {
+
+      if (response.status === 401 || response.status === 404) {
+        localStorage.removeItem("veltro_token");
+        authToken = null;
+        showAuth();
+        return;
+      }
+
+      throw new Error("Unable to load dashboard.");
+    }
+
+    const data = await response.json();
+
+    const user = data.user;
+
+    document.getElementById("profileName").textContent = user.name;
+
+    document.getElementById("profileEmail").textContent = user.email;
+
+    document.getElementById("profileId").textContent = user.id;
+
+    document.getElementById("profileDate").textContent =
+      new Date(user.created_at).toLocaleDateString();
+
+    document.getElementById("authContainer").classList.add("hidden");
+
+    document.getElementById("dashboard").classList.remove("hidden");
+
+  } catch(error) {
+
+    console.error("Dashboard error:", error);
+
+    document.getElementById("authMessage").textContent =
+      "Unable to load your dashboard. Please try again.";
+
+  }
+
+}
+
+// SHOW LOGIN AND REGISTRATION
+
+function showAuth() {
+
+  document.getElementById("dashboard").classList.add("hidden");
+
+  document.getElementById("authContainer").classList.remove("hidden");
+
+}
+
+// LOGOUT
+
+function logout() {
+
+  localStorage.removeItem("veltro_token");
+
+  authToken = null;
+
+  showAuth();
+
+  showLogin();
+
+  document.getElementById("authMessage").textContent =
+    "You have successfully logged out.";
+
+}
+
+// MARKET FUNCTIONS
 
 function money(value) {
+
   if (value === null || value === undefined) return "—";
 
   return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: value < 1 ? 6 : 2
+    style:"currency",
+    currency:"USD",
+    maximumFractionDigits:value < 1 ? 6 : 2
   }).format(value);
+
 }
 
 function compact(value) {
+
   if (value === null || value === undefined) return "—";
 
   return "$" + new Intl.NumberFormat("en-US", {
-    notation: "compact",
-    maximumFractionDigits: 2
+    notation:"compact",
+    maximumFractionDigits:2
   }).format(value);
+
 }
 
+// LOAD CRYPTOCURRENCIES
+
 async function loadCoins() {
+
   const status = document.getElementById("status");
+
   const table = document.getElementById("coinTable");
 
   try {
+
     status.textContent = "Updating cryptocurrency prices...";
 
     const response = await fetch(API_URL);
 
     if (!response.ok) {
-      throw new Error("Market API unavailable");
+      throw new Error("Market API unavailable.");
     }
 
     const coins = await response.json();
 
     if (!Array.isArray(coins)) {
-      throw new Error("Invalid market data");
+      throw new Error("Invalid market data.");
     }
 
     document.getElementById("assetCount").textContent = coins.length;
 
     const bitcoin = coins.find(c => c.id === "bitcoin");
+
     const ethereum = coins.find(c => c.id === "ethereum");
 
     if (bitcoin) {
@@ -394,21 +942,34 @@ async function loadCoins() {
         money(ethereum.current_price);
     }
 
-    table.innerHTML = coins.map((coin, index) => {
+    table.innerHTML = coins.map((coin,index) => {
+
       const change = Number(coin.price_change_percentage_24h || 0);
+
       const changeClass = change >= 0 ? "positive" : "negative";
+
       const sign = change > 0 ? "+" : "";
 
       return `
         <tr>
-          <td>${coin.market_cap_rank || index + 1}</td>
+
+          <td>${escapeHTML(coin.market_cap_rank || index + 1)}</td>
 
           <td>
             <div class="coin">
-              <img src="${coin.image}" alt="">
-              <span>${coin.name}
-                <span class="symbol">${coin.symbol}</span>
+
+              <img
+                src="${escapeHTML(coin.image)}"
+                alt=""
+                loading="lazy">
+
+              <span>
+                ${escapeHTML(coin.name)}
+                <span class="symbol">
+                  ${escapeHTML(coin.symbol)}
+                </span>
               </span>
+
             </div>
           </td>
 
@@ -421,34 +982,43 @@ async function loadCoins() {
           <td>${compact(coin.market_cap)}</td>
 
           <td>${compact(coin.total_volume)}</td>
+
         </tr>
       `;
+
     }).join("");
 
     status.textContent =
-      "Live market data loaded. Last updated: " +
+      "Market data updated: " +
       new Date().toLocaleTimeString();
 
-  } catch (error) {
+  } catch(error) {
+
     console.error(error);
 
     status.textContent =
       "Unable to load market data. Please try again.";
 
-    table.innerHTML = `
-      <tr>
-        <td colspan="6">
-          Market data is temporarily unavailable.
-        </td>
-      </tr>
-    `;
   }
+
 }
 
-loadCoins();
+// INITIALIZE VELTRO
 
-// Refresh market data every 60 seconds.
-setInterval(loadCoins, 60000);
+async function initializeVeltro() {
+
+  await loadDashboard();
+
+  await loadCoins();
+
+}
+
+initializeVeltro();
+
+// UPDATE PRICES EVERY 60 SECONDS
+
+setInterval(loadCoins,60000);
+
 </script>
 
 </body>
