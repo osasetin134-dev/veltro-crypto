@@ -30,7 +30,7 @@ const pool = new Pool({
     : undefined
 });
 
-// Create users table
+// DATABASE INITIALIZATION
 async function initializeDatabase() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
@@ -42,10 +42,37 @@ async function initializeDatabase() {
     );
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS portfolio (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      coin_id VARCHAR(100) NOT NULL,
+      symbol VARCHAR(20) NOT NULL,
+      name VARCHAR(100) NOT NULL,
+      quantity NUMERIC(38,18) NOT NULL CHECK (quantity > 0),
+      average_buy_price NUMERIC(30,12) NOT NULL DEFAULT 0,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(user_id, coin_id)
+    );
+  `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS watchlist (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      coin_id VARCHAR(100) NOT NULL,
+      symbol VARCHAR(20) NOT NULL,
+      name VARCHAR(100) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(user_id, coin_id)
+    );
+  `);
+
   console.log("VELTRO database ready.");
 }
 
-// Authentication middleware
+// AUTHENTICATION
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
 
@@ -67,7 +94,39 @@ function authenticateToken(req, res, next) {
   }
 }
 
-// Home
+// VALIDATION HELPERS
+function validCoinId(value) {
+  return typeof value === "string" &&
+    /^[a-z0-9-]{1,100}$/.test(value);
+}
+
+function validText(value, maxLength) {
+  return typeof value === "string" &&
+    value.trim().length > 0 &&
+    value.trim().length <= maxLength;
+}
+
+function validPositiveNumber(value) {
+  return (
+    (typeof value === "number" || typeof value === "string") &&
+    String(value).length <= 40 &&
+    /^\d+(\.\d{1,18})?$/.test(String(value)) &&
+    Number.isFinite(Number(value)) &&
+    Number(value) > 0
+  );
+}
+
+function validNonNegativeNumber(value) {
+  return (
+    (typeof value === "number" || typeof value === "string") &&
+    String(value).length <= 40 &&
+    /^\d+(\.\d{1,18})?$/.test(String(value)) &&
+    Number.isFinite(Number(value)) &&
+    Number(value) >= 0
+  );
+}
+
+// HOME
 app.get("/", (req, res) => {
   res.json({
     message: "VELTRO Crypto API is running!",
@@ -99,8 +158,10 @@ app.post("/api/auth/register", async (req, res) => {
       });
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) ||
-        cleanEmail.length > 255) {
+    if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) ||
+      cleanEmail.length > 255
+    ) {
       return res.status(400).json({
         error: "Please enter a valid email address."
       });
@@ -109,17 +170,6 @@ app.post("/api/auth/register", async (req, res) => {
     if (password.length < 8 || password.length > 72) {
       return res.status(400).json({
         error: "Password must contain 8 to 72 characters."
-      });
-    }
-
-    const existingUser = await pool.query(
-      "SELECT id FROM users WHERE email = $1",
-      [cleanEmail]
-    );
-
-    if (existingUser.rows.length > 0) {
-      return res.status(409).json({
-        error: "An account with this email already exists."
       });
     }
 
@@ -257,7 +307,248 @@ app.get("/api/auth/me", authenticateToken, async (req, res) => {
   }
 });
 
+// ======================================
+// VELTRO PORTFOLIO
+// ======================================
+
+// GET USER PORTFOLIO
+app.get("/api/portfolio", authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT id, coin_id, symbol, name, quantity,
+              average_buy_price, created_at, updated_at
+       FROM portfolio
+       WHERE user_id = $1
+       ORDER BY created_at DESC`,
+      [req.user.id]
+    );
+
+    res.json({
+      portfolio: result.rows
+    });
+
+  } catch (error) {
+    console.error("Portfolio error:", error.message);
+
+    res.status(500).json({
+      error: "Unable to load portfolio."
+    });
+  }
+});
+
+// ADD OR UPDATE A PORTFOLIO HOLDING
+app.post("/api/portfolio", authenticateToken, async (req, res) => {
+  try {
+    const {
+      coin_id,
+      symbol,
+      name,
+      quantity,
+      average_buy_price
+    } = req.body;
+
+    if (
+      !validCoinId(coin_id) ||
+      !validText(symbol, 20) ||
+      !validText(name, 100) ||
+      !validPositiveNumber(quantity) ||
+      !validNonNegativeNumber(average_buy_price)
+    ) {
+      return res.status(400).json({
+        error: "Please provide valid coin and holding details."
+      });
+    }
+
+    const result = await pool.query(
+      `INSERT INTO portfolio
+       (user_id, coin_id, symbol, name, quantity, average_buy_price)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       ON CONFLICT (user_id, coin_id)
+       DO UPDATE SET
+         symbol = EXCLUDED.symbol,
+         name = EXCLUDED.name,
+         quantity = EXCLUDED.quantity,
+         average_buy_price = EXCLUDED.average_buy_price,
+         updated_at = CURRENT_TIMESTAMP
+       RETURNING *`,
+      [
+        req.user.id,
+        coin_id,
+        symbol.trim().toUpperCase(),
+        name.trim(),
+        String(quantity),
+        String(average_buy_price)
+      ]
+    );
+
+    res.status(200).json({
+      message: "Portfolio holding saved successfully.",
+      holding: result.rows[0]
+    });
+
+  } catch (error) {
+    console.error("Save portfolio error:", error.message);
+
+    res.status(500).json({
+      error: "Unable to save portfolio holding."
+    });
+  }
+});
+
+// REMOVE PORTFOLIO HOLDING
+app.delete(
+  "/api/portfolio/:coinId",
+  authenticateToken,
+  async (req, res) => {
+    try {
+      if (!validCoinId(req.params.coinId)) {
+        return res.status(400).json({
+          error: "Invalid coin ID."
+        });
+      }
+
+      const result = await pool.query(
+        `DELETE FROM portfolio
+         WHERE user_id = $1 AND coin_id = $2
+         RETURNING id`,
+        [req.user.id, req.params.coinId]
+      );
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({
+          error: "Portfolio holding not found."
+        });
+      }
+
+      res.json({
+        message: "Portfolio holding removed."
+      });
+
+    } catch (error) {
+      console.error("Remove portfolio error:", error.message);
+
+      res.status(500).json({
+        error: "Unable to remove portfolio holding."
+      });
+    }
+  }
+);
+
+// ======================================
+// VELTRO WATCHLIST
+// ======================================
+
+// GET USER WATCHLIST
+app.get("/api/watchlist", authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT id, coin_id, symbol, name, created_at
+       FROM watchlist
+       WHERE user_id = $1
+       ORDER BY created_at DESC`,
+      [req.user.id]
+    );
+
+    res.json({
+      watchlist: result.rows
+    });
+
+  } catch (error) {
+    console.error("Watchlist error:", error.message);
+
+    res.status(500).json({
+      error: "Unable to load watchlist."
+    });
+  }
+});
+
+// ADD COIN TO WATCHLIST
+app.post("/api/watchlist", authenticateToken, async (req, res) => {
+  try {
+    const { coin_id, symbol, name } = req.body;
+
+    if (
+      !validCoinId(coin_id) ||
+      !validText(symbol, 20) ||
+      !validText(name, 100)
+    ) {
+      return res.status(400).json({
+        error: "Please provide valid coin details."
+      });
+    }
+
+    const result = await pool.query(
+      `INSERT INTO watchlist (user_id, coin_id, symbol, name)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (user_id, coin_id) DO NOTHING
+       RETURNING *`,
+      [
+        req.user.id,
+        coin_id,
+        symbol.trim().toUpperCase(),
+        name.trim()
+      ]
+    );
+
+    res.status(200).json({
+      message: result.rowCount
+        ? "Coin added to your watchlist."
+        : "Coin is already in your watchlist.",
+      coin: result.rows[0] || null
+    });
+
+  } catch (error) {
+    console.error("Add watchlist error:", error.message);
+
+    res.status(500).json({
+      error: "Unable to add coin to watchlist."
+    });
+  }
+});
+
+// REMOVE COIN FROM WATCHLIST
+app.delete(
+  "/api/watchlist/:coinId",
+  authenticateToken,
+  async (req, res) => {
+    try {
+      if (!validCoinId(req.params.coinId)) {
+        return res.status(400).json({
+          error: "Invalid coin ID."
+        });
+      }
+
+      const result = await pool.query(
+        `DELETE FROM watchlist
+         WHERE user_id = $1 AND coin_id = $2
+         RETURNING id`,
+        [req.user.id, req.params.coinId]
+      );
+
+      if (result.rowCount === 0) {
+        return res.status(404).json({
+          error: "Coin not found in your watchlist."
+        });
+      }
+
+      res.json({
+        message: "Coin removed from watchlist."
+      });
+
+    } catch (error) {
+      console.error("Remove watchlist error:", error.message);
+
+      res.status(500).json({
+        error: "Unable to remove coin from watchlist."
+      });
+    }
+  }
+);
+
+// ======================================
 // LIVE CRYPTOCURRENCY MARKET
+// ======================================
+
 app.get("/api/coins", async (req, res) => {
   try {
     if (!API_KEY) {
