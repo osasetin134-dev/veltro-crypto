@@ -3,137 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELTRO | The Future of Crypto Trading</title>
+<title>VELTRO | Buy. Sell. Trade.</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#080808;color:#fff;font-family:Arial,sans-serif}
-:root{--gold:#d9ad48;--muted:#999}
-header{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #242424}
-.logo{font-size:27px;font-weight:900;letter-spacing:4px;color:var(--gold)}
-nav{display:flex;gap:28px}
-nav a{color:#ccc;text-decoration:none;font-size:14px}
-nav a:hover{color:var(--gold)}
-.btn{background:var(--gold);color:#090909;padding:13px 22px;border-radius:7px;text-decoration:none;font-weight:bold;border:0;cursor:pointer}
-.hero{padding:100px 8%;display:flex;align-items:center;justify-content:space-between;gap:50px;min-height:520px}
-.hero-text{max-width:600px}
-.tag{color:var(--gold);letter-spacing:3px;font-size:12px;margin-bottom:22px}
-h1{font-size:58px;line-height:1.13;margin-bottom:22px}
-h1 span{color:var(--gold)}
-.hero p{color:#aaa;line-height:1.8;font-size:16px;margin-bottom:30px}
-.hero-buttons{display:flex;gap:15px;flex-wrap:wrap}
-.outline{border:1px solid var(--gold);color:var(--gold);padding:13px 22px;border-radius:7px;text-decoration:none}
-.coin-art{width:300px;height:300px;border:1px solid #604b21;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:125px;color:var(--gold);box-shadow:0 0 70px #80602030;flex-shrink:0}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:25px 8%;background:#111;border-top:1px solid #292929;border-bottom:1px solid #292929}
-.stat{text-align:center}
-.stat strong{font-size:24px;color:var(--gold);display:block;margin-bottom:7px}
-.stat small{color:#888}
-.section{padding:75px 8%}
-.section-title{text-align:center;margin-bottom:35px}
-.section-title h2{font-size:32px;margin-bottom:12px}
-.section-title p{color:#999}
-.coins{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.coin{background:#141414;padding:22px;border:1px solid #292929;border-radius:12px}
-.coin-icon{font-size:30px;margin-bottom:15px}
-.coin h3{margin-bottom:7px}
-.coin p{color:#999;font-size:13px}
-.coin .price{color:var(--gold);font-size:19px;font-weight:bold;margin-top:15px}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.feature{background:#141414;border:1px solid #292929;padding:28px;border-radius:12px}
-.feature .icon{font-size:30px;margin-bottom:18px}
-.feature h3{margin-bottom:12px;color:var(--gold)}
-.feature p{color:#999;line-height:1.7;font-size:14px}
-.cta{margin:20px 8% 80px;padding:55px 25px;text-align:center;background:linear-gradient(120deg,#201b10,#111);border:1px solid #57451f;border-radius:15px}
-.cta h2{font-size:32px;margin-bottom:15px}
-.cta p{color:#aaa;margin-bottom:25px}
-footer{padding:30px 8%;border-top:1px solid #292929;color:#888;text-align:center;font-size:13px;line-height:2}
-footer strong{color:var(--gold)}
-@media(max-width:750px){
-nav{display:none}
-.hero{padding:65px 7%;flex-direction:column;text-align:center}
-h1{font-size:43px}
-.hero-buttons{justify-content:center}
-.coin-art{width:220px;height:220px;font-size:90px}
-.stats{padding:25px 4%;gap:8px}
-.stat strong{font-size:19px}
-.coins{grid-template-columns:repeat(2,1fr)}
-.features{grid-template-columns:1fr}
-.section{padding:55px 6%}
+:root {
+  --gold: #d9ad48;
+  --bg: #080808;
+  --card: #151515;
+  --muted: #999;
+  --green: #21c784;
+  --red: #ff5c66;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 7%;
+  border-bottom: 1px solid #252525;
+}
+
+.logo {
+  color: var(--gold);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: var(--gold);
+}
+
+.hero {
+  padding: 75px 7%;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 70px);
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.7;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 15px 30px;
+  background: var(--gold);
+  color: #080808;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.section {
+  padding: 45px 7%;
+}
+
+.section-title {
+  margin-bottom: 25px;
+  font-size: 27px;
+}
+
+.section-title span {
+  color: var(--gold);
+}
+
+.market-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.market-info div {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 130px;
+}
+
+.market-info small {
+  color: var(--muted);
+}
+
+.market-info h3 {
+  margin-top: 9px;
+  color: var(--gold);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: var(--card);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  padding: 18px 15px;
+  text-align: left;
+  border-bottom: 1px solid #292929;
+}
+
+th {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+td {
+  font-size: 14px;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.coin img {
+  width: 30px;
+  height: 30px;
+}
+
+.symbol {
+  color: var(--muted);
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+
+.positive {
+  color: var(--green);
+}
+
+.negative {
+  color: var(--red);
+}
+
+.status {
+  color: var(--muted);
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.feature {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 9px;
+  border: 1px solid #282828;
+}
+
+.feature h3 {
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.feature p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  border-top: 1px solid #252525;
+  color: var(--muted);
+  margin-top: 40px;
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 18px 5%;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 60px 5%;
+  }
+
+  .section {
+    padding: 35px 5%;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">VELTRO</div>
-<nav>
-<a href="#home">Home</a>
-<a href="#markets">Markets</a>
-<a href="#features">Features</a>
-<a href="#about">About</a>
-</nav>
-<a href="#markets" class="btn">Explore Markets</a>
+  <div class="logo">VELTRO</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#markets">Markets</a>
+    <a href="#features">Features</a>
+  </nav>
 </header>
 
 <section class="hero" id="home">
-<div class="hero-text">
-<div class="tag">THE FUTURE OF DIGITAL FINANCE</div>
-<h1>Trade Crypto.<br><span>Beyond Limits.</span></h1>
-<p>Discover a smarter way to explore cryptocurrency markets. Track digital assets, monitor prices and prepare for your next trading move with VELTRO.</p>
-<div class="hero-buttons">
-<a href="#markets" class="btn">Explore Crypto</a>
-<a href="#features" class="outline">Discover VELTRO</a>
-</div>
-</div>
-<div class="coin-art">₿</div>
-</section>
+  <h1>Trade Crypto.<br><span>Beyond Limits.</span></h1>
 
-<section class="stats">
-<div class="stat"><strong>100+</strong><small>Digital Assets Planned</small></div>
-<div class="stat"><strong>24/7</strong><small>Market Access</small></div>
-<div class="stat"><strong>Global</strong><small>Crypto Markets</small></div>
+  <p>
+    Discover cryptocurrency markets, monitor live prices
+    and explore digital assets with VELTRO.
+    Buy. Sell. Trade. Beyond Limits.
+  </p>
+
+  <a href="#markets" class="button">Explore Markets</a>
 </section>
 
 <section class="section" id="markets">
-<div class="section-title">
-<h2>Explore Crypto Markets</h2>
-<p>Discover popular cryptocurrencies in one place.</p>
-</div>
-<div class="coins">
-<div class="coin"><div class="coin-icon">₿</div><h3>Bitcoin</h3><p>BTC · Cryptocurrency</p><div class="price">BTC</div></div>
-<div class="coin"><div class="coin-icon">◆</div><h3>Ethereum</h3><p>ETH · Smart contracts</p><div class="price">ETH</div></div>
-<div class="coin"><div class="coin-icon">₮</div><h3>Tether</h3><p>USDT · Stablecoin</p><div class="price">USDT</div></div>
-<div class="coin"><div class="coin-icon">◎</div><h3>Solana</h3><p>SOL · Blockchain</p><div class="price">SOL</div></div>
-<div class="coin"><div class="coin-icon">✕</div><h3>XRP</h3><p>XRP · Digital asset</p><div class="price">XRP</div></div>
-<div class="coin"><div class="coin-icon">◆</div><h3>BNB</h3><p>BNB · Digital asset</p><div class="price">BNB</div></div>
-<div class="coin"><div class="coin-icon">Ð</div><h3>Dogecoin</h3><p>DOGE · Digital asset</p><div class="price">DOGE</div></div>
-<div class="coin"><div class="coin-icon">Ł</div><h3>Litecoin</h3><p>LTC · Digital asset</p><div class="price">LTC</div></div>
-</div>
+
+  <h2 class="section-title">Live Crypto <span>Markets</span></h2>
+
+  <p class="status" id="status">Connecting to cryptocurrency markets...</p>
+
+  <div class="market-info">
+    <div>
+      <small>Bitcoin Price</small>
+      <h3 id="bitcoinPrice">Loading...</h3>
+    </div>
+
+    <div>
+      <small>Ethereum Price</small>
+      <h3 id="ethereumPrice">Loading...</h3>
+    </div>
+
+    <div>
+      <small>Assets Displayed</small>
+      <h3 id="assetCount">Loading...</h3>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Asset</th>
+          <th>Price (USD)</th>
+          <th>24H Change</th>
+          <th>Market Cap</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+
+      <tbody id="coinTable">
+        <tr>
+          <td colspan="6">Loading cryptocurrency data...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 
 <section class="section" id="features">
-<div class="section-title">
-<h2>Why Choose VELTRO?</h2>
-<p>Designed for a modern cryptocurrency experience.</p>
-</div>
-<div class="features">
-<div class="feature"><div class="icon">🔒</div><h3>Security First</h3><p>Security-focused design and account protection are central to the VELTRO experience.</p></div>
-<div class="feature"><div class="icon">📊</div><h3>Market Insights</h3><p>Explore digital assets and follow cryptocurrency market movements.</p></div>
-<div class="feature"><div class="icon">⚡</div><h3>Simple Experience</h3><p>A clean and accessible platform designed to make crypto markets easier to navigate.</p></div>
-</div>
-</section>
+  <h2 class="section-title">Why <span>VELTRO?</span></h2>
 
-<section class="cta" id="about">
-<h2>Welcome to VELTRO</h2>
-<p>Your journey into digital finance starts here.</p>
-<a href="#markets" class="btn">Explore the Markets</a>
+  <div class="features">
+
+    <div class="feature">
+      <h3>Live Market Data</h3>
+      <p>Monitor cryptocurrency prices and market movements.</p>
+    </div>
+
+    <div class="feature">
+      <h3>Multiple Assets</h3>
+      <p>Explore hundreds of cryptocurrencies from one platform.</p>
+    </div>
+
+    <div class="feature">
+      <h3>Simple Experience</h3>
+      <p>Enjoy a clean and easy-to-use cryptocurrency interface.</p>
+    </div>
+
+  </div>
 </section>
 
 <footer>
-<strong>VELTRO</strong><br>
-Buy. Sell. Trade. Beyond Limits.<br>
-© 2026 VELTRO. All rights reserved.<br>
-Cryptocurrency trading involves risk. Prices can rise or fall.
+  <div class="logo">VELTRO</div>
+  <p>Buy. Sell. Trade. Beyond Limits.</p>
+  <br>
+  <p>Market data powered by CoinGecko.</p>
+  <br>
+  <p>Cryptocurrency investments involve risk. Prices can rise or fall.</p>
+  <br>
+  &copy; 2026 VELTRO. All rights reserved.
 </footer>
+
+<script>
+const API_URL = "https://veltro-api.onrender.com/api/coins";
+
+function money(value) {
+  if (value === null || value === undefined) return "—";
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: value < 1 ? 6 : 2
+  }).format(value);
+}
+
+function compact(value) {
+  if (value === null || value === undefined) return "—";
+
+  return "$" + new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    maximumFractionDigits: 2
+  }).format(value);
+}
+
+async function loadCoins() {
+  const status = document.getElementById("status");
+  const table = document.getElementById("coinTable");
+
+  try {
+    status.textContent = "Updating cryptocurrency prices...";
+
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("Market API unavailable");
+    }
+
+    const coins = await response.json();
+
+    if (!Array.isArray(coins)) {
+      throw new Error("Invalid market data");
+    }
+
+    document.getElementById("assetCount").textContent = coins.length;
+
+    const bitcoin = coins.find(c => c.id === "bitcoin");
+    const ethereum = coins.find(c => c.id === "ethereum");
+
+    if (bitcoin) {
+      document.getElementById("bitcoinPrice").textContent =
+        money(bitcoin.current_price);
+    }
+
+    if (ethereum) {
+      document.getElementById("ethereumPrice").textContent =
+        money(ethereum.current_price);
+    }
+
+    table.innerHTML = coins.map((coin, index) => {
+      const change = Number(coin.price_change_percentage_24h || 0);
+      const changeClass = change >= 0 ? "positive" : "negative";
+      const sign = change > 0 ? "+" : "";
+
+      return `
+        <tr>
+          <td>${coin.market_cap_rank || index + 1}</td>
+
+          <td>
+            <div class="coin">
+              <img src="${coin.image}" alt="">
+              <span>${coin.name}
+                <span class="symbol">${coin.symbol}</span>
+              </span>
+            </div>
+          </td>
+
+          <td>${money(coin.current_price)}</td>
+
+          <td class="${changeClass}">
+            ${sign}${change.toFixed(2)}%
+          </td>
+
+          <td>${compact(coin.market_cap)}</td>
+
+          <td>${compact(coin.total_volume)}</td>
+        </tr>
+      `;
+    }).join("");
+
+    status.textContent =
+      "Live market data loaded. Last updated: " +
+      new Date().toLocaleTimeString();
+
+  } catch (error) {
+    console.error(error);
+
+    status.textContent =
+      "Unable to load market data. Please try again.";
+
+    table.innerHTML = `
+      <tr>
+        <td colspan="6">
+          Market data is temporarily unavailable.
+        </td>
+      </tr>
+    `;
+  }
+}
+
+loadCoins();
+
+// Refresh market data every 60 seconds.
+setInterval(loadCoins, 60000);
+</script>
 
 </body>
 </html>
