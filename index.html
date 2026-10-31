@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELTRO | The Future of Crypto Trading</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080808;color:#fff;font-family:Arial,sans-serif}
+:root{--gold:#d9ad48;--muted:#999}
+header{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #242424}
+.logo{font-size:27px;font-weight:900;letter-spacing:4px;color:var(--gold)}
+nav{display:flex;gap:28px}
+nav a{color:#ccc;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+.btn{background:var(--gold);color:#090909;padding:13px 22px;border-radius:7px;text-decoration:none;font-weight:bold;border:0;cursor:pointer}
+.hero{padding:100px 8%;display:flex;align-items:center;justify-content:space-between;gap:50px;min-height:520px}
+.hero-text{max-width:600px}
+.tag{color:var(--gold);letter-spacing:3px;font-size:12px;margin-bottom:22px}
+h1{font-size:58px;line-height:1.13;margin-bottom:22px}
+h1 span{color:var(--gold)}
+.hero p{color:#aaa;line-height:1.8;font-size:16px;margin-bottom:30px}
+.hero-buttons{display:flex;gap:15px;flex-wrap:wrap}
+.outline{border:1px solid var(--gold);color:var(--gold);padding:13px 22px;border-radius:7px;text-decoration:none}
+.coin-art{width:300px;height:300px;border:1px solid #604b21;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:125px;color:var(--gold);box-shadow:0 0 70px #80602030;flex-shrink:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:25px 8%;background:#111;border-top:1px solid #292929;border-bottom:1px solid #292929}
+.stat{text-align:center}
+.stat strong{font-size:24px;color:var(--gold);display:block;margin-bottom:7px}
+.stat small{color:#888}
+.section{padding:75px 8%}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title h2{font-size:32px;margin-bottom:12px}
+.section-title p{color:#999}
+.coins{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.coin{background:#141414;padding:22px;border:1px solid #292929;border-radius:12px}
+.coin-icon{font-size:30px;margin-bottom:15px}
+.coin h3{margin-bottom:7px}
+.coin p{color:#999;font-size:13px}
+.coin .price{color:var(--gold);font-size:19px;font-weight:bold;margin-top:15px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{background:#141414;border:1px solid #292929;padding:28px;border-radius:12px}
+.feature .icon{font-size:30px;margin-bottom:18px}
+.feature h3{margin-bottom:12px;color:var(--gold)}
+.feature p{color:#999;line-height:1.7;font-size:14px}
+.cta{margin:20px 8% 80px;padding:55px 25px;text-align:center;background:linear-gradient(120deg,#201b10,#111);border:1px solid #57451f;border-radius:15px}
+.cta h2{font-size:32px;margin-bottom:15px}
+.cta p{color:#aaa;margin-bottom:25px}
+footer{padding:30px 8%;border-top:1px solid #292929;color:#888;text-align:center;font-size:13px;line-height:2}
+footer strong{color:var(--gold)}
+@media(max-width:750px){
+nav{display:none}
+.hero{padding:65px 7%;flex-direction:column;text-align:center}
+h1{font-size:43px}
+.hero-buttons{justify-content:center}
+.coin-art{width:220px;height:220px;font-size:90px}
+.stats{padding:25px 4%;gap:8px}
+.stat strong{font-size:19px}
+.coins{grid-template-columns:repeat(2,1fr)}
+.features{grid-template-columns:1fr}
+.section{padding:55px 6%}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">VELTRO</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#markets">Markets</a>
+<a href="#features">Features</a>
+<a href="#about">About</a>
+</nav>
+<a href="#markets" class="btn">Explore Markets</a>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-text">
+<div class="tag">THE FUTURE OF DIGITAL FINANCE</div>
+<h1>Trade Crypto.<br><span>Beyond Limits.</span></h1>
+<p>Discover a smarter way to explore cryptocurrency markets. Track digital assets, monitor prices and prepare for your next trading move with VELTRO.</p>
+<div class="hero-buttons">
+<a href="#markets" class="btn">Explore Crypto</a>
+<a href="#features" class="outline">Discover VELTRO</a>
+</div>
+</div>
+<div class="coin-art">₿</div>
+</section>
+
+<section class="stats">
+<div class="stat"><strong>100+</strong><small>Digital Assets Planned</small></div>
+<div class="stat"><strong>24/7</strong><small>Market Access</small></div>
+<div class="stat"><strong>Global</strong><small>Crypto Markets</small></div>
+</section>
+
+<section class="section" id="markets">
+<div class="section-title">
+<h2>Explore Crypto Markets</h2>
+<p>Discover popular cryptocurrencies in one place.</p>
+</div>
+<div class="coins">
+<div class="coin"><div class="coin-icon">₿</div><h3>Bitcoin</h3><p>BTC · Cryptocurrency</p><div class="price">BTC</div></div>
+<div class="coin"><div class="coin-icon">◆</div><h3>Ethereum</h3><p>ETH · Smart contracts</p><div class="price">ETH</div></div>
+<div class="coin"><div class="coin-icon">₮</div><h3>Tether</h3><p>USDT · Stablecoin</p><div class="price">USDT</div></div>
+<div class="coin"><div class="coin-icon">◎</div><h3>Solana</h3><p>SOL · Blockchain</p><div class="price">SOL</div></div>
+<div class="coin"><div class="coin-icon">✕</div><h3>XRP</h3><p>XRP · Digital asset</p><div class="price">XRP</div></div>
+<div class="coin"><div class="coin-icon">◆</div><h3>BNB</h3><p>BNB · Digital asset</p><div class="price">BNB</div></div>
+<div class="coin"><div class="coin-icon">Ð</div><h3>Dogecoin</h3><p>DOGE · Digital asset</p><div class="price">DOGE</div></div>
+<div class="coin"><div class="coin-icon">Ł</div><h3>Litecoin</h3><p>LTC · Digital asset</p><div class="price">LTC</div></div>
+</div>
+</section>
+
+<section class="section" id="features">
+<div class="section-title">
+<h2>Why Choose VELTRO?</h2>
+<p>Designed for a modern cryptocurrency experience.</p>
+</div>
+<div class="features">
+<div class="feature"><div class="icon">🔒</div><h3>Security First</h3><p>Security-focused design and account protection are central to the VELTRO experience.</p></div>
+<div class="feature"><div class="icon">📊</div><h3>Market Insights</h3><p>Explore digital assets and follow cryptocurrency market movements.</p></div>
+<div class="feature"><div class="icon">⚡</div><h3>Simple Experience</h3><p>A clean and accessible platform designed to make crypto markets easier to navigate.</p></div>
+</div>
+</section>
+
+<section class="cta" id="about">
+<h2>Welcome to VELTRO</h2>
+<p>Your journey into digital finance starts here.</p>
+<a href="#markets" class="btn">Explore the Markets</a>
+</section>
+
+<footer>
+<strong>VELTRO</strong><br>
+Buy. Sell. Trade. Beyond Limits.<br>
+© 2026 VELTRO. All rights reserved.<br>
+Cryptocurrency trading involves risk. Prices can rise or fall.
+</footer>
+
+</body>
+</html>
