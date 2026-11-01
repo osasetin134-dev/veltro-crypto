@@ -3,1588 +3,411 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 <title>VELTRO | Buy. Sell. Trade.</title>
-
 <style>
-:root {
-  --gold:#d9ad48;
-  --bg:#080808;
-  --card:#151515;
-  --muted:#999;
-  --green:#21c784;
-  --red:#ff5c66;
-}
-
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body {
-  background:var(--bg);
-  color:white;
-  font-family:Arial,sans-serif;
-}
-
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:22px 7%;
-  border-bottom:1px solid #252525;
-  flex-wrap:wrap;
-  gap:15px;
-}
-
-.logo {
-  color:var(--gold);
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:3px;
-}
-
-nav {
-  display:flex;
-  flex-wrap:wrap;
-  gap:18px;
-}
-
-nav a {
-  color:white;
-  text-decoration:none;
-  font-size:14px;
-}
-
-nav a:hover {
-  color:var(--gold);
-}
-
-button,.button {
-  cursor:pointer;
-  border:none;
-  border-radius:5px;
-  padding:12px 17px;
-  background:var(--gold);
-  color:#080808;
-  font-weight:bold;
-  text-decoration:none;
-}
-
-button:hover,.button:hover {
-  opacity:.85;
-}
-
-button:disabled {
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-.hero {
-  padding:75px 7%;
-  text-align:center;
-}
-
-.hero h1 {
-  font-size:clamp(38px,7vw,70px);
-  margin-bottom:20px;
-}
-
-.hero h1 span {
-  color:var(--gold);
-}
-
-.hero p {
-  color:var(--muted);
-  max-width:600px;
-  margin:auto;
-  line-height:1.7;
-}
-
-.section {
-  padding:45px 7%;
-}
-
-.section-title {
-  margin-bottom:25px;
-  font-size:27px;
-}
-
-.section-title span {
-  color:var(--gold);
-}
-
-.auth-container {
-  max-width:450px;
-  margin:30px auto;
-  padding:30px;
-  background:var(--card);
-  border:1px solid #333;
-  border-radius:12px;
-}
-
-.auth-container h2 {
-  margin-bottom:20px;
-}
-
-.auth-container input,
-.form-input {
-  width:100%;
-  padding:15px;
-  margin:10px 0;
-  background:#080808;
-  color:white;
-  border:1px solid #333;
-  border-radius:5px;
-  outline:none;
-}
-
-.auth-container input:focus,
-.form-input:focus {
-  border-color:var(--gold);
-}
-
-.auth-container button {
-  width:100%;
-  margin-top:15px;
-}
-
-.auth-tabs {
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.auth-tabs button {
-  background:#292929;
-  color:white;
-}
-
-.auth-tabs button.active {
-  background:var(--gold);
-  color:black;
-}
-
-.auth-message {
-  margin-top:15px;
-  color:var(--gold);
-  font-size:14px;
-  line-height:1.5;
-}
-
-.dashboard {
-  max-width:1100px;
-  margin:30px auto;
-  padding:30px;
-  background:var(--card);
-  border:1px solid #333;
-  border-radius:12px;
-}
-
-.dashboard h2 {
-  color:var(--gold);
-  margin-bottom:20px;
-}
-
-.profile-card {
-  background:#080808;
-  padding:20px;
-  border-radius:8px;
-  margin:15px 0;
-  line-height:2;
-}
-
-.dashboard-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  margin:20px 0;
-}
-
-.dashboard-box {
-  padding:20px;
-  background:#080808;
-  border-radius:8px;
-}
-
-.dashboard-box h3 {
-  color:var(--gold);
-  margin-bottom:10px;
-}
-
-.market-info {
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-bottom:25px;
-}
-
-.market-info div {
-  background:var(--card);
-  padding:18px;
-  border-radius:8px;
-  flex:1;
-  min-width:130px;
-}
-
-.market-info small {
-  color:var(--muted);
-}
-
-.market-info h3 {
-  margin-top:9px;
-  color:var(--gold);
-}
-
-.table-wrap {
-  overflow-x:auto;
-  background:var(--card);
-  border-radius:10px;
-  margin-bottom:25px;
-}
-
-table {
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-
-th,td {
-  padding:16px 12px;
-  text-align:left;
-  border-bottom:1px solid #292929;
-}
-
-th {
-  color:var(--gold);
-  font-size:13px;
-}
-
-td {
-  font-size:14px;
-}
-
-.coin {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:bold;
-}
-
-.coin img {
-  width:30px;
-  height:30px;
-}
-
-.symbol {
-  color:var(--muted);
-  margin-left:5px;
-  text-transform:uppercase;
-}
-
-.positive {
-  color:var(--green);
-}
-
-.negative {
-  color:var(--red);
-}
-
-.status {
-  color:var(--muted);
-  margin-bottom:15px;
-  font-size:13px;
-}
-
-.features {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.feature {
-  background:var(--card);
-  padding:25px;
-  border-radius:9px;
-  border:1px solid #282828;
-}
-
-.feature h3 {
-  color:var(--gold);
-  margin-bottom:12px;
-}
-
-.feature p {
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.action-button {
-  padding:9px 12px;
-  font-size:12px;
-  margin:3px;
-  white-space:nowrap;
-}
-
-.secondary-button {
-  background:#292929;
-  color:white;
-  border:1px solid #444;
-}
-
-.danger-button {
-  background:#471c20;
-  color:white;
-}
-
-.panel {
-  background:#101010;
-  border:1px solid #303030;
-  border-radius:10px;
-  padding:22px;
-  margin:25px 0;
-}
-
-.panel h3 {
-  color:var(--gold);
-  margin-bottom:15px;
-}
-
-.panel p {
-  color:var(--muted);
-  line-height:1.7;
-}
-
-.panel-actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:15px;
-}
-
-.panel-actions button {
-  flex:1;
-  min-width:130px;
-}
-
-.empty-message {
-  padding:22px;
-  color:var(--muted);
-  text-align:center;
-}
-
-.small-note {
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-  margin-top:12px;
-}
-
-.hidden {
-  display:none !important;
-}
-
-footer {
-  text-align:center;
-  padding:35px 15px;
-  border-top:1px solid #252525;
-  color:var(--muted);
-  margin-top:40px;
-}
-
-@media(max-width:600px) {
-  header {
-    padding:18px 5%;
-  }
-
-  .hero,.section {
-    padding:40px 5%;
-  }
-
-  .auth-container,.dashboard {
-    padding:20px;
-  }
-
-  .panel {
-    padding:15px;
-  }
-}
+:root{--gold:#d9ad48;--bg:#080808;--card:#151515;--muted:#999;--green:#21c784;--red:#ff5c66}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;gap:15px;flex-wrap:wrap;border-bottom:1px solid #252525}
+.logo{color:var(--gold);font-size:28px;font-weight:900;letter-spacing:3px}
+nav{display:flex;gap:17px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+button,.button{cursor:pointer;border:0;border-radius:6px;padding:12px 16px;background:var(--gold);color:#080808;font-weight:bold;text-decoration:none}
+button:disabled{opacity:.5;cursor:not-allowed}
+.secondary{background:#292929;color:#fff;border:1px solid #444}
+.danger{background:#471c20;color:#fff}
+.hero,.section{padding:48px 5%}
+.hero{text-align:center;padding-top:75px;padding-bottom:70px}
+.hero h1{font-size:clamp(38px,7vw,68px);margin-bottom:20px}
+.hero h1 span,.section-title span{color:var(--gold)}
+.hero p{max-width:650px;margin:0 auto 25px;color:var(--muted);line-height:1.7}
+.section-title{font-size:28px;margin-bottom:22px}
+.auth-container,.dashboard{max-width:1100px;margin:25px auto;padding:24px;background:var(--card);border:1px solid #333;border-radius:12px}
+.auth-container{max-width:450px}
+.auth-container h2,.dashboard h2{color:var(--gold);margin-bottom:18px}
+.auth-tabs{display:flex;gap:10px;margin:18px 0}
+.auth-tabs button{flex:1;background:#292929;color:white}
+.auth-tabs button.active{background:var(--gold);color:#080808}
+input,select{width:100%;padding:14px;margin:8px 0;background:#080808;color:#fff;border:1px solid #444;border-radius:6px;outline:none}
+input:focus,select:focus{border-color:var(--gold)}
+.auth-container form>button{width:100%;margin-top:12px}
+.auth-message,.status,.note{font-size:13px;color:var(--muted);line-height:1.6;margin:12px 0}
+.dashboard>p{line-height:1.6}
+.profile-card,.box,.panel{background:#090909;border:1px solid #292929;border-radius:9px;padding:18px;margin:16px 0}
+.profile-card{line-height:2}
+.profile-card h3,.panel h3{color:var(--gold);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:18px 0}
+.box small{color:var(--muted)}
+.box strong{display:block;color:var(--gold);font-size:22px;margin-top:9px;overflow-wrap:anywhere}
+.panel{background:#101010;padding:20px}
+.panel>p{color:var(--muted);line-height:1.6}
+.trade-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:16px}
+.trade-card{background:#090909;border:1px solid #333;border-radius:9px;padding:17px}
+.trade-card h4{color:var(--gold);margin-bottom:10px}
+.trade-card button{width:100%;margin-top:8px}
+.form-label{display:block;font-size:13px;color:var(--muted);margin-top:9px}
+.market-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.market-info>div{background:var(--card);padding:17px;border-radius:8px}
+.market-info small{color:var(--muted)}
+.market-info h3{color:var(--gold);margin-top:8px;overflow-wrap:anywhere}
+.table-wrap{width:100%;overflow-x:auto;background:var(--card);border-radius:9px;margin:15px 0}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{padding:14px 11px;text-align:left;border-bottom:1px solid #292929;font-size:13px;white-space:nowrap}
+th{color:var(--gold)}
+.coin{display:flex;align-items:center;gap:9px;font-weight:bold}
+.coin img{width:27px;height:27px}
+.symbol{color:var(--muted);text-transform:uppercase;margin-left:4px}
+.positive{color:var(--green)}.negative{color:var(--red)}
+.action{padding:8px 10px;font-size:12px;margin:2px}
+.empty{text-align:center;color:var(--muted);padding:22px}
+.hidden{display:none!important}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.feature{background:var(--card);border:1px solid #292929;border-radius:9px;padding:22px}
+.feature h3{color:var(--gold);margin-bottom:10px}
+.feature p{color:var(--muted);line-height:1.6}
+.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.inline-actions button{flex:1;min-width:130px}
+footer{text-align:center;padding:32px 15px;border-top:1px solid #252525;color:var(--muted);line-height:1.8}
+footer .logo{margin-bottom:8px}
+@media(max-width:600px){header{padding:17px 5%}nav{gap:13px}.hero,.section{padding:38px 5%}.auth-container,.dashboard{padding:17px}.panel{padding:14px}.section-title{font-size:25px}}
 </style>
 </head>
-
 <body>
-
 <header>
   <div class="logo">VELTRO</div>
-
   <nav>
-    <a href="#home">Home</a>
-    <a href="#markets">Markets</a>
-    <a href="#features">Features</a>
-    <a href="#account">Account</a>
+    <a href="#home">Home</a><a href="#markets">Markets</a><a href="#trading">Trade</a><a href="#features">Features</a><a href="#account">Account</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
-
-  <h1>Trade Crypto.<br>
-  <span>Beyond Limits.</span></h1>
-
-  <p>
-    Discover cryptocurrency markets, monitor live prices
-    and explore digital assets with VELTRO.
-    Buy. Sell. Trade. Beyond Limits.
-  </p>
-
+  <h1>Trade Crypto.<br><span>Beyond Limits.</span></h1>
+  <p>Discover cryptocurrency markets, monitor live prices and practise trading digital assets with VELTRO.</p>
   <a href="#account" class="button">Get Started</a>
-
 </section>
 
-<!-- ACCOUNT SECTION -->
-
 <section class="section" id="account">
-
   <div class="auth-container" id="authContainer">
-
     <h2>Welcome to VELTRO</h2>
-
     <div class="auth-tabs">
-
-      <button id="loginTab" class="active"
-        type="button" onclick="showLogin()">
-        Login
-      </button>
-
-      <button id="registerTab"
-        type="button" onclick="showRegister()">
-        Register
-      </button>
-
+      <button id="loginTab" class="active" type="button" onclick="showLogin()">Login</button>
+      <button id="registerTab" type="button" onclick="showRegister()">Register</button>
     </div>
-
     <form id="loginForm">
-
-      <input type="email" id="loginEmail"
-        placeholder="Email address"
-        autocomplete="email" required>
-
-      <input type="password" id="loginPassword"
-        placeholder="Password"
-        autocomplete="current-password" required>
-
-      <button type="submit" id="loginButton">
-        Login to VELTRO
-      </button>
-
+      <input type="email" id="loginEmail" placeholder="Email address" autocomplete="email" required>
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+      <button id="loginButton" type="submit">Login to VELTRO</button>
     </form>
-
     <form id="registerForm" class="hidden">
-
-      <input type="text" id="registerName"
-        placeholder="Full name"
-        maxlength="100" autocomplete="name" required>
-
-      <input type="email" id="registerEmail"
-        placeholder="Email address"
-        autocomplete="email" required>
-
-      <input type="password" id="registerPassword"
-        placeholder="Create password (minimum 8 characters)"
-        minlength="8" maxlength="72"
-        autocomplete="new-password" required>
-
-      <button type="submit" id="registerButton">
-        Create Account
-      </button>
-
+      <input type="text" id="registerName" placeholder="Full name" maxlength="100" autocomplete="name" required>
+      <input type="email" id="registerEmail" placeholder="Email address" autocomplete="email" required>
+      <input type="password" id="registerPassword" placeholder="Password (minimum 8 characters)" minlength="8" maxlength="72" autocomplete="new-password" required>
+      <button id="registerButton" type="submit">Create Account</button>
     </form>
-
-    <p class="auth-message" id="authMessage"
-       role="status" aria-live="polite"></p>
-
+    <p class="auth-message" id="authMessage" role="status" aria-live="polite"></p>
   </div>
 
-  <!-- PERSONAL DASHBOARD -->
-
   <div class="dashboard hidden" id="dashboard">
-
-    <h2>Welcome to your dashboard!</h2>
-
-    <p>You are successfully logged into VELTRO.</p>
-
+    <h2>My VELTRO Dashboard</h2>
+    <p>Welcome back. Your trading account below is a simulated demo account. It does not hold real money or execute real cryptocurrency trades.</p>
     <div class="profile-card">
-
       <h3>My Profile</h3>
-
       <p>Name: <span id="profileName"></span></p>
       <p>Email: <span id="profileEmail"></span></p>
       <p>Account ID: <span id="profileId"></span></p>
       <p>Member Since: <span id="profileDate"></span></p>
-
     </div>
 
-    <div class="dashboard-grid">
-
-      <div class="dashboard-box">
-        <h3>Account Status</h3>
-        <p>Registered</p>
-      </div>
-
-      <div class="dashboard-box">
-        <h3>Market Access</h3>
-        <p>Available</p>
-      </div>
-
-      <div class="dashboard-box">
-        <h3>Portfolio</h3>
-        <p id="portfolioAssetCount">0 assets</p>
-      </div>
-
-      <div class="dashboard-box">
-        <h3>Watchlist</h3>
-        <p id="watchlistAssetCount">0 coins</p>
-      </div>
-
+    <div class="grid">
+      <div class="box"><small>Demo USD Balance</small><strong id="walletBalance">$â</strong></div>
+      <div class="box"><small>Open Positions</small><strong id="openPositions">0</strong></div>
+      <div class="box"><small>Realized Profit / Loss</small><strong id="realizedProfit">$0.00</strong></div>
+      <div class="box"><small>Total Demo Trades</small><strong id="tradeCount">0</strong></div>
     </div>
 
-    <!-- PORTFOLIO -->
+    <div class="panel" id="trading">
+      <h3>VELTRO Demo Trading</h3>
+      <p>Practise buying and selling with your virtual USD balance. Prices are requested by the server from CoinGecko when an order is submitted. Orders are simulated only.</p>
+      <div class="trade-grid">
+        <div class="trade-card">
+          <h4>Buy Cryptocurrency</h4>
+          <label class="form-label" for="buyCoin">Select asset</label>
+          <select id="buyCoin"><option value="">Load markets first</option></select>
+          <label class="form-label" for="buyQuantity">Quantity to buy</label>
+          <input id="buyQuantity" type="number" min="0.00000001" step="any" placeholder="e.g. 0.001">
+          <p class="note" id="buyEstimate">Estimated cost: â</p>
+          <button id="buyButton" onclick="submitTrade('buy')">Buy with Demo USD</button>
+        </div>
+        <div class="trade-card">
+          <h4>Sell Cryptocurrency</h4>
+          <label class="form-label" for="sellCoin">Your asset</label>
+          <select id="sellCoin"><option value="">No positions yet</option></select>
+          <label class="form-label" for="sellQuantity">Quantity to sell</label>
+          <input id="sellQuantity" type="number" min="0.00000001" step="any" placeholder="e.g. 0.001">
+          <p class="note" id="sellEstimate">Estimated proceeds: â</p>
+          <button id="sellButton" class="danger" onclick="submitTrade('sell')">Sell Asset</button>
+        </div>
+      </div>
+      <p class="status" id="tradeStatus" role="status" aria-live="polite"></p>
+      <div class="inline-actions">
+        <button class="secondary" onclick="refreshTrading()">Refresh Trading Data</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>My Demo Positions</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Asset</th><th>Quantity</th><th>Average Buy Price</th><th>Market Price</th><th>Estimated Value</th><th>Unrealized P/L</th></tr></thead>
+        <tbody id="positionsTable"><tr><td colspan="6" class="empty">Log in to load positions.</td></tr></tbody>
+      </table></div>
+      <p class="note">Position value and unrealized profit/loss are estimates using the latest market data available in this page.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Transaction History</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Date</th><th>Type</th><th>Asset</th><th>Quantity</th><th>Execution Price</th><th>Total</th><th>Realized P/L</th></tr></thead>
+        <tbody id="transactionsTable"><tr><td colspan="7" class="empty">No transactions loaded.</td></tr></tbody>
+      </table></div>
+    </div>
 
     <div class="panel" id="portfolio">
-
-      <h3>My Portfolio</h3>
-
-      <p>
-        Track your cryptocurrency holdings and their estimated
-        market value.
-      </p>
-
+      <h3>My Portfolio Tracker</h3>
+      <p>This is a separate manual holdings tracker from demo trading. Adding or removing a tracker holding does not move demo funds or create a trade.</p>
       <div class="market-info">
-
-        <div>
-          <small>Estimated Portfolio Value</small>
-          <h3 id="portfolioValue">$0.00</h3>
-        </div>
-
-        <div>
-          <small>Estimated Cost</small>
-          <h3 id="portfolioCost">$0.00</h3>
-        </div>
-
+        <div><small>Estimated Portfolio Value</small><h3 id="portfolioValue">$0.00</h3></div>
+        <div><small>Estimated Cost</small><h3 id="portfolioCost">$0.00</h3></div>
       </div>
-
-      <p class="status" id="portfolioStatus">
-        Loading portfolio...
-      </p>
-
-      <div class="table-wrap">
-
-        <table>
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Quantity</th>
-              <th>Average Buy Price</th>
-              <th>Current Price</th>
-              <th>Estimated Value</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody id="portfolioTable">
-            <tr>
-              <td colspan="6">Loading portfolio...</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-
-      <p class="small-note">
-        Portfolio values are estimates based on market prices.
-        This feature tracks holdings only. It is not a crypto wallet
-        and does not execute real trades.
-      </p>
-
+      <div class="table-wrap"><table>
+        <thead><tr><th>Asset</th><th>Quantity</th><th>Average Buy Price</th><th>Current Price</th><th>Estimated Value</th><th>Action</th></tr></thead>
+        <tbody id="portfolioTable"><tr><td colspan="6" class="empty">Loading portfolio...</td></tr></tbody>
+      </table></div>
     </div>
-
-    <!-- WATCHLIST -->
 
     <div class="panel" id="watchlist">
-
       <h3>My Watchlist</h3>
-
-      <p>
-        Keep your favourite cryptocurrencies in one place.
-      </p>
-
-      <p class="status" id="watchlistStatus">
-        Loading watchlist...
-      </p>
-
-      <div class="table-wrap">
-
-        <table>
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Symbol</th>
-              <th>Current Price</th>
-              <th>24H Change</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody id="watchlistTable">
-            <tr>
-              <td colspan="5">Loading watchlist...</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-
+      <div class="table-wrap"><table>
+        <thead><tr><th>Asset</th><th>Symbol</th><th>Current Price</th><th>24H Change</th><th>Action</th></tr></thead>
+        <tbody id="watchlistTable"><tr><td colspan="5" class="empty">Loading watchlist...</td></tr></tbody>
+      </table></div>
     </div>
-
-    <button onclick="logout()">Logout</button>
-
+    <button class="secondary" onclick="logout()">Logout</button>
   </div>
-
 </section>
-
-<!-- MARKET SECTION -->
 
 <section class="section" id="markets">
-
-  <h2 class="section-title">
-    Live Crypto <span>Markets</span>
-  </h2>
-
-  <p class="status" id="status">
-    Connecting to cryptocurrency markets...
-  </p>
-
+  <h2 class="section-title">Live Crypto <span>Markets</span></h2>
+  <p class="status" id="marketStatus">Connecting to cryptocurrency markets...</p>
   <div class="market-info">
-
-    <div>
-      <small>Bitcoin Price</small>
-      <h3 id="bitcoinPrice">Loading...</h3>
-    </div>
-
-    <div>
-      <small>Ethereum Price</small>
-      <h3 id="ethereumPrice">Loading...</h3>
-    </div>
-
-    <div>
-      <small>Assets Displayed</small>
-      <h3 id="assetCount">Loading...</h3>
-    </div>
-
+    <div><small>Bitcoin Price</small><h3 id="bitcoinPrice">Loading...</h3></div>
+    <div><small>Ethereum Price</small><h3 id="ethereumPrice">Loading...</h3></div>
+    <div><small>Assets Displayed</small><h3 id="assetCount">Loading...</h3></div>
   </div>
-
-  <div class="table-wrap">
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Asset</th>
-          <th>Price (USD)</th>
-          <th>24H Change</th>
-          <th>Market Cap</th>
-          <th>Volume</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody id="coinTable">
-
-        <tr>
-          <td colspan="7">
-            Loading cryptocurrency data...
-          </td>
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Asset</th><th>Price (USD)</th><th>24H Change</th><th>Market Cap</th><th>Volume</th><th>Actions</th></tr></thead>
+    <tbody id="coinTable"><tr><td colspan="7" class="empty">Loading cryptocurrency data...</td></tr></tbody>
+  </table></div>
 </section>
-
-<!-- FEATURES -->
 
 <section class="section" id="features">
-
-  <h2 class="section-title">
-    Why <span>VELTRO?</span>
-  </h2>
-
+  <h2 class="section-title">Why <span>VELTRO?</span></h2>
   <div class="features">
-
-    <div class="feature">
-      <h3>Live Market Data</h3>
-      <p>Monitor cryptocurrency prices and market movements.</p>
-    </div>
-
-    <div class="feature">
-      <h3>My Portfolio</h3>
-      <p>Track your cryptocurrency holdings and estimated values.</p>
-    </div>
-
-    <div class="feature">
-      <h3>My Watchlist</h3>
-      <p>Save your favourite cryptocurrencies for easy monitoring.</p>
-    </div>
-
-    <div class="feature">
-      <h3>Personal Accounts</h3>
-      <p>Create your account and access your personal dashboard.</p>
-    </div>
-
+    <div class="feature"><h3>Live Market Data</h3><p>Monitor cryptocurrency prices and market movements.</p></div>
+    <div class="feature"><h3>Demo Trading</h3><p>Practise simulated buy and sell orders without risking real funds.</p></div>
+    <div class="feature"><h3>Portfolio & Watchlist</h3><p>Track holdings and save favourite cryptocurrencies.</p></div>
+    <div class="feature"><h3>Personal Accounts</h3><p>Access your own account and private trading records.</p></div>
   </div>
-
 </section>
 
-<footer>
-
-  <div class="logo">VELTRO</div>
-
-  <p>Buy. Sell. Trade. Beyond Limits.</p>
-
-  <br>
-
-  <p>Market data powered by CoinGecko.</p>
-
-  <br>
-
-  <p>Cryptocurrency investments involve risk.</p>
-
-  <br>
-
-  &copy; 2026 VELTRO. All rights reserved.
-
-</footer>
+<footer><div class="logo">VELTRO</div><p>Buy. Sell. Trade. Beyond Limits.</p><p>Market data powered by CoinGecko.</p><p>Demo trading only. Cryptocurrency markets involve risk.</p><p>Â© 2026 VELTRO. All rights reserved.</p></footer>
 
 <script>
+const API_BASE="https://veltro-api.onrender.com";
+const API_URL=API_BASE+"/api/coins";
+let authToken=localStorage.getItem("veltro_token");
+let marketCoins=[],portfolioItems=[],watchlistItems=[],positions=[];
 
-// VELTRO API CONFIGURATION
-
-const API_BASE = "https://veltro-api.onrender.com";
-const API_URL = API_BASE + "/api/coins";
-
-let authToken = localStorage.getItem("veltro_token");
-let marketCoins = [];
-let portfolioItems = [];
-let watchlistItems = [];
-
-// HTML ESCAPING
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[char]);
-}
-
-// API REQUEST HELPER
-
-async function apiRequest(endpoint, options = {}) {
-
-  const headers = {
-    ...(options.headers || {})
-  };
-
-  if (options.body) {
-    headers["Content-Type"] = "application/json";
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function money(v){if(v===null||v===undefined||!Number.isFinite(Number(v)))return "â";return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:Number(v)<1?6:2}).format(Number(v));}
+function compact(v){if(v===null||v===undefined||!Number.isFinite(Number(v)))return "â";return "$"+new Intl.NumberFormat("en-US",{notation:"compact",maximumFractionDigits:2}).format(Number(v));}
+function numberFormat(v){return new Intl.NumberFormat("en-US",{maximumFractionDigits:8}).format(Number(v));}
+function getCoin(id){return marketCoins.find(c=>c.id===id);}
+async function apiRequest(endpoint,options={}){
+  const headers={...(options.headers||{})};
+  if(options.body)headers["Content-Type"]="application/json";
+  if(authToken)headers.Authorization="Bearer "+authToken;
+  const response=await fetch(API_BASE+endpoint,{...options,headers});
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok){
+    if(response.status===401){localStorage.removeItem("veltro_token");authToken=null;showAuth();}
+    throw new Error(result.error||"Request failed.");
   }
-
-  if (authToken) {
-    headers["Authorization"] = "Bearer " + authToken;
-  }
-
-  const response = await fetch(API_BASE + endpoint, {
-    ...options,
-    headers
-  });
-
-  const result = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem("veltro_token");
-      authToken = null;
-      showAuth();
-    }
-
-    throw new Error(result.error || "Request failed.");
-  }
-
   return result;
 }
-
-// AUTHENTICATION TABS
-
-function showLogin() {
-
-  document.getElementById("loginForm").classList.remove("hidden");
-  document.getElementById("registerForm").classList.add("hidden");
-
-  document.getElementById("loginTab").classList.add("active");
-  document.getElementById("registerTab").classList.remove("active");
-
-  document.getElementById("authMessage").textContent = "";
-
-}
-
-function showRegister() {
-
-  document.getElementById("registerForm").classList.remove("hidden");
-  document.getElementById("loginForm").classList.add("hidden");
-
-  document.getElementById("registerTab").classList.add("active");
-  document.getElementById("loginTab").classList.remove("active");
-
-  document.getElementById("authMessage").textContent = "";
-
-}
-
-// AUTHENTICATION REQUEST
-
-async function authRequest(endpoint, data) {
-
-  const response = await fetch(API_BASE + endpoint, {
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify(data)
-  });
-
-  const result = await response.json();
-
-  if (!response.ok) {
-    throw new Error(result.error || "Authentication failed.");
-  }
-
-  if (!result.token) {
-    throw new Error("Authentication token was not returned.");
-  }
-
-  return result;
-
-}
-
-// REGISTER
-
-document.getElementById("registerForm").addEventListener(
-  "submit",
-  async function(event) {
-
-    event.preventDefault();
-
-    const button = document.getElementById("registerButton");
-    const message = document.getElementById("authMessage");
-
-    button.disabled = true;
-    button.textContent = "Creating Account...";
-
-    try {
-
-      const result = await authRequest(
-        "/api/auth/register",
-        {
-          name:document.getElementById("registerName").value,
-          email:document.getElementById("registerEmail").value,
-          password:document.getElementById("registerPassword").value
-        }
-      );
-
-      authToken = result.token;
-      localStorage.setItem("veltro_token", authToken);
-
-      document.getElementById("registerForm").reset();
-
-      await loadDashboard();
-
-      message.textContent = "";
-
-      alert("Welcome to VELTRO! Your account has been created.");
-
-    } catch(error) {
-
-      message.textContent = error.message;
-
-    } finally {
-
-      button.disabled = false;
-      button.textContent = "Create Account";
-
-    }
-
-  }
-);
-
-// LOGIN
-
-document.getElementById("loginForm").addEventListener(
-  "submit",
-  async function(event) {
-
-    event.preventDefault();
-
-    const button = document.getElementById("loginButton");
-    const message = document.getElementById("authMessage");
-
-    button.disabled = true;
-    button.textContent = "Logging in...";
-
-    try {
-
-      const result = await authRequest(
-        "/api/auth/login",
-        {
-          email:document.getElementById("loginEmail").value,
-          password:document.getElementById("loginPassword").value
-        }
-      );
-
-      authToken = result.token;
-      localStorage.setItem("veltro_token", authToken);
-
-      document.getElementById("loginForm").reset();
-
-      await loadDashboard();
-
-      message.textContent = "";
-
-      alert("Login successful! Welcome back.");
-
-    } catch(error) {
-
-      message.textContent = error.message;
-
-    } finally {
-
-      button.disabled = false;
-      button.textContent = "Login to VELTRO";
-
-    }
-
-  }
-);
-
-// SHOW LOGIN AND REGISTRATION
-
-function showAuth() {
-
-  document.getElementById("dashboard").classList.add("hidden");
-  document.getElementById("authContainer").classList.remove("hidden");
-
-}
-
-// LOAD PERSONAL DASHBOARD
-
-async function loadDashboard() {
-
-  if (!authToken) return;
-
-  try {
-
-    const data = await apiRequest("/api/auth/me");
-
-    const user = data.user;
-
-    document.getElementById("profileName").textContent = user.name;
-    document.getElementById("profileEmail").textContent = user.email;
-    document.getElementById("profileId").textContent = user.id;
-
-    document.getElementById("profileDate").textContent =
-      new Date(user.created_at).toLocaleDateString();
-
+function showLogin(){document.getElementById("loginForm").classList.remove("hidden");document.getElementById("registerForm").classList.add("hidden");document.getElementById("loginTab").classList.add("active");document.getElementById("registerTab").classList.remove("active");document.getElementById("authMessage").textContent="";}
+function showRegister(){document.getElementById("registerForm").classList.remove("hidden");document.getElementById("loginForm").classList.add("hidden");document.getElementById("registerTab").classList.add("active");document.getElementById("loginTab").classList.remove("active");document.getElementById("authMessage").textContent="";}
+function showAuth(){document.getElementById("dashboard").classList.add("hidden");document.getElementById("authContainer").classList.remove("hidden");}
+async function authRequest(endpoint,data){const r=await fetch(API_BASE+endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"Authentication failed.");if(!d.token)throw new Error("Authentication token was not returned.");return d;}
+
+document.getElementById("registerForm").addEventListener("submit",async e=>{
+  e.preventDefault();const b=document.getElementById("registerButton"),m=document.getElementById("authMessage");b.disabled=true;b.textContent="Creating Account...";
+  try{const d=await authRequest("/api/auth/register",{name:document.getElementById("registerName").value,email:document.getElementById("registerEmail").value,password:document.getElementById("registerPassword").value});authToken=d.token;localStorage.setItem("veltro_token",authToken);document.getElementById("registerForm").reset();await loadDashboard();m.textContent="";alert("Welcome to VELTRO! Your demo account is ready.");}
+  catch(err){m.textContent=err.message;}finally{b.disabled=false;b.textContent="Create Account";}
+});
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();const b=document.getElementById("loginButton"),m=document.getElementById("authMessage");b.disabled=true;b.textContent="Logging in...";
+  try{const d=await authRequest("/api/auth/login",{email:document.getElementById("loginEmail").value,password:document.getElementById("loginPassword").value});authToken=d.token;localStorage.setItem("veltro_token",authToken);document.getElementById("loginForm").reset();await loadDashboard();m.textContent="";alert("Login successful! Welcome back.");}
+  catch(err){m.textContent=err.message;}finally{b.disabled=false;b.textContent="Login to VELTRO";}
+});
+function logout(){localStorage.removeItem("veltro_token");authToken=null;portfolioItems=[];watchlistItems=[];positions=[];showAuth();showLogin();document.getElementById("authMessage").textContent="You have successfully logged out.";}
+
+async function loadDashboard(){
+  if(!authToken)return;
+  try{
+    const d=await apiRequest("/api/auth/me"),u=d.user;
+    document.getElementById("profileName").textContent=u.name;
+    document.getElementById("profileEmail").textContent=u.email;
+    document.getElementById("profileId").textContent=u.id;
+    document.getElementById("profileDate").textContent=new Date(u.created_at).toLocaleDateString();
     document.getElementById("authContainer").classList.add("hidden");
     document.getElementById("dashboard").classList.remove("hidden");
+    await Promise.all([loadTrading(),loadPortfolio(),loadWatchlist()]);
+  }catch(err){console.error("Dashboard:",err);document.getElementById("authMessage").textContent="Unable to load dashboard: "+err.message;}
+}
 
-    await Promise.all([
-      loadPortfolio(),
-      loadWatchlist()
+async function loadCoins(){
+  const status=document.getElementById("marketStatus"),table=document.getElementById("coinTable");
+  try{
+    status.textContent="Updating cryptocurrency prices...";
+    const r=await fetch(API_URL);if(!r.ok)throw new Error("Market API unavailable.");
+    const coins=await r.json();if(!Array.isArray(coins))throw new Error("Invalid market data.");
+    marketCoins=coins;
+    document.getElementById("assetCount").textContent=coins.length;
+    const btc=getCoin("bitcoin"),eth=getCoin("ethereum");
+    document.getElementById("bitcoinPrice").textContent=btc?money(btc.current_price):"â";
+    document.getElementById("ethereumPrice").textContent=eth?money(eth.current_price):"â";
+    table.innerHTML=coins.map((c,i)=>{const ch=Number(c.price_change_percentage_24h||0);return `<tr>
+      <td>${escapeHTML(c.market_cap_rank||i+1)}</td>
+      <td><div class="coin"><img src="${escapeHTML(c.image)}" alt="" loading="lazy"><span>${escapeHTML(c.name)} <span class="symbol">${escapeHTML(c.symbol)}</span></span></div></td>
+      <td>${money(c.current_price)}</td><td class="${ch>=0?"positive":"negative"}">${ch>0?"+":""}${ch.toFixed(2)}%</td>
+      <td>${compact(c.market_cap)}</td><td>${compact(c.total_volume)}</td>
+      <td><button class="action" onclick="addToWatchlist('${escapeHTML(c.id)}')">Watch</button><button class="action secondary" onclick="selectBuyCoin('${escapeHTML(c.id)}')">Trade</button><button class="action secondary" onclick="addToPortfolio('${escapeHTML(c.id)}')">Track</button></td>
+    </tr>`;}).join("");
+    status.textContent="Market data updated: "+new Date().toLocaleTimeString();
+    populateTradeSelectors();renderPositions();renderPortfolio();renderWatchlist();
+  }catch(err){console.error(err);status.textContent="Unable to load market data. "+err.message;}
+}
+function populateTradeSelectors(){
+  const buy=document.getElementById("buyCoin"),sell=document.getElementById("sellCoin"),old=buy.value;
+  buy.innerHTML=marketCoins.map(c=>`<option value="${escapeHTML(c.id)}">${escapeHTML(c.name)} (${escapeHTML(c.symbol.toUpperCase())})</option>`).join("");
+  if(old&&getCoin(old))buy.value=old;
+  const prior=sell.value;
+  sell.innerHTML=positions.length?positions.map(p=>`<option value="${escapeHTML(p.coin_id)}">${escapeHTML(p.name)} (${escapeHTML(p.symbol.toUpperCase())}) â ${numberFormat(p.quantity)}</option>`).join(""):'<option value="">No positions yet</option>';
+  if(prior&&positions.some(p=>p.coin_id===prior))sell.value=prior;
+  updateEstimate("buy");updateEstimate("sell");
+}
+function selectBuyCoin(id){if(!authToken){alert("Please log in to use demo trading.");document.getElementById("account").scrollIntoView();return;}document.getElementById("buyCoin").value=id;document.getElementById("trading").scrollIntoView({behavior:"smooth"});}
+function updateEstimate(type){
+  const id=document.getElementById(type==="buy"?"buyCoin":"sellCoin").value;
+  const q=Number(document.getElementById(type==="buy"?"buyQuantity":"sellQuantity").value);
+  const coin=getCoin(id),out=document.getElementById(type==="buy"?"buyEstimate":"sellEstimate");
+  out.textContent=(type==="buy"?"Estimated cost: ":"Estimated proceeds: ")+(coin&&q>0?money(q*coin.current_price):"â");
+}
+["buyCoin","buyQuantity","sellCoin","sellQuantity"].forEach(id=>document.getElementById(id).addEventListener("input",()=>updateEstimate(id.startsWith("buy")?"buy":"sell")));
+document.getElementById("buyCoin").addEventListener("change",()=>updateEstimate("buy"));
+document.getElementById("sellCoin").addEventListener("change",()=>updateEstimate("sell"));
+
+async function submitTrade(type){
+  if(!authToken){alert("Please log in first.");document.getElementById("account").scrollIntoView();return;}
+  const id=document.getElementById(type+"Coin").value,q=document.getElementById(type+"Quantity").value;
+  if(!id){alert("Select a cryptocurrency.");return;}
+  if(!/^\d+(\.\d{1,18})?$/.test(String(q))||!Number.isFinite(Number(q))||Number(q)<=0){alert("Enter a valid quantity greater than zero.");return;}
+  const button=document.getElementById(type+"Button"),status=document.getElementById("tradeStatus");
+  button.disabled=true;button.textContent=type==="buy"?"Processing Buy...":"Processing Sell...";status.textContent="Submitting simulated order...";
+  try{
+    const result=await apiRequest("/api/trading/"+type,{method:"POST",body:JSON.stringify({coin_id:id,quantity:String(q)})});
+    status.textContent=result.message+" Execution price: "+money(result.transaction?.price)+". Order total: "+money(result.transaction?.total)+".";
+    document.getElementById(type+"Quantity").value="";
+    await loadTrading();
+    alert(result.message+"\nTotal: "+money(result.transaction?.total)+"\nRemaining demo balance: "+money(result.wallet_balance));
+  }catch(err){status.textContent="Order not completed: "+err.message;alert("Trade failed: "+err.message);}
+  finally{button.disabled=false;button.textContent=type==="buy"?"Buy with Demo USD":"Sell Asset";updateEstimate(type);}
+}
+async function loadTrading(){
+  if(!authToken)return;
+  try{
+    const [w,p,t,s]=await Promise.all([
+      apiRequest("/api/trading/wallet"),
+      apiRequest("/api/trading/positions"),
+      apiRequest("/api/trading/transactions"),
+      apiRequest("/api/trading/summary")
     ]);
-
-  } catch(error) {
-
-    console.error("Dashboard error:", error);
-
-    document.getElementById("authMessage").textContent =
-      "Unable to load your dashboard. Please try again.";
-
-  }
-
+    document.getElementById("walletBalance").textContent=money(w.wallet?.balance);
+    positions=p.positions||[];
+    document.getElementById("openPositions").textContent=s.open_positions??positions.length;
+    document.getElementById("realizedProfit").textContent=money(s.realized_profit);
+    document.getElementById("realizedProfit").className=Number(s.realized_profit)>=0?"positive":"negative";
+    document.getElementById("tradeCount").textContent=Number(s.total_buys||0)+Number(s.total_sells||0);
+    renderPositions();renderTransactions(t.transactions||[]);populateTradeSelectors();
+  }catch(err){console.error("Trading data:",err);document.getElementById("tradeStatus").textContent="Unable to load trading data: "+err.message;}
 }
-
-// LOGOUT
-
-function logout() {
-
-  localStorage.removeItem("veltro_token");
-  authToken = null;
-
-  portfolioItems = [];
-  watchlistItems = [];
-
-  showAuth();
-  showLogin();
-
-  document.getElementById("authMessage").textContent =
-    "You have successfully logged out.";
-
-}
-
-// MARKET FORMATTING
-
-function money(value) {
-
-  if (value === null || value === undefined || !Number.isFinite(Number(value))) {
-    return "—";
-  }
-
-  return new Intl.NumberFormat("en-US", {
-    style:"currency",
-    currency:"USD",
-    maximumFractionDigits:Number(value) < 1 ? 6 : 2
-  }).format(Number(value));
-
-}
-
-function compact(value) {
-
-  if (value === null || value === undefined || !Number.isFinite(Number(value))) {
-    return "—";
-  }
-
-  return "$" + new Intl.NumberFormat("en-US", {
-    notation:"compact",
-    maximumFractionDigits:2
-  }).format(Number(value));
-
-}
-
-function numberFormat(value) {
-
-  return new Intl.NumberFormat("en-US", {
-    maximumFractionDigits:8
-  }).format(Number(value));
-
-}
-
-// GET CURRENT MARKET PRICE
-
-function getCoin(coinId) {
-
-  return marketCoins.find(coin => coin.id === coinId);
-
-}
-
-// LOAD CRYPTOCURRENCIES
-
-async function loadCoins() {
-
-  const status = document.getElementById("status");
-  const table = document.getElementById("coinTable");
-
-  try {
-
-    status.textContent = "Updating cryptocurrency prices...";
-
-    const response = await fetch(API_URL);
-
-    if (!response.ok) {
-      throw new Error("Market API unavailable.");
-    }
-
-    const coins = await response.json();
-
-    if (!Array.isArray(coins)) {
-      throw new Error("Invalid market data.");
-    }
-
-    marketCoins = coins;
-
-    document.getElementById("assetCount").textContent = coins.length;
-
-    const bitcoin = coins.find(c => c.id === "bitcoin");
-    const ethereum = coins.find(c => c.id === "ethereum");
-
-    if (bitcoin) {
-      document.getElementById("bitcoinPrice").textContent =
-        money(bitcoin.current_price);
-    }
-
-    if (ethereum) {
-      document.getElementById("ethereumPrice").textContent =
-        money(ethereum.current_price);
-    }
-
-    table.innerHTML = coins.map((coin,index) => {
-
-      const change = Number(coin.price_change_percentage_24h || 0);
-
-      const changeClass = change >= 0 ? "positive" : "negative";
-      const sign = change > 0 ? "+" : "";
-
-      return `
-        <tr>
-
-          <td>${escapeHTML(coin.market_cap_rank || index + 1)}</td>
-
-          <td>
-            <div class="coin">
-              <img src="${escapeHTML(coin.image)}"
-                alt="" loading="lazy">
-
-              <span>
-                ${escapeHTML(coin.name)}
-                <span class="symbol">
-                  ${escapeHTML(coin.symbol)}
-                </span>
-              </span>
-            </div>
-          </td>
-
-          <td>${money(coin.current_price)}</td>
-
-          <td class="${changeClass}">
-            ${sign}${change.toFixed(2)}%
-          </td>
-
-          <td>${compact(coin.market_cap)}</td>
-
-          <td>${compact(coin.total_volume)}</td>
-
-          <td>
-            <button class="action-button"
-              onclick="addToWatchlist('${escapeHTML(coin.id)}')">
-              Watch
-            </button>
-
-            <button class="action-button secondary-button"
-              onclick="addToPortfolio('${escapeHTML(coin.id)}')">
-              Add
-            </button>
-          </td>
-
-        </tr>
-      `;
-
-    }).join("");
-
-    status.textContent =
-      "Market data updated: " + new Date().toLocaleTimeString();
-
-    renderPortfolio();
-
-    renderWatchlist();
-
-  } catch(error) {
-
-    console.error(error);
-
-    status.textContent =
-      "Unable to load market data. Please try again.";
-
-  }
-
-}
-
-// PORTFOLIO
-
-async function loadPortfolio() {
-
-  const status = document.getElementById("portfolioStatus");
-
-  try {
-
-    status.textContent = "Loading your portfolio...";
-
-    const data = await apiRequest("/api/portfolio");
-
-    portfolioItems = Array.isArray(data) ? data : data.portfolio || [];
-
-    renderPortfolio();
-
-    status.textContent = "Your portfolio is up to date.";
-
-  } catch(error) {
-
-    console.error(error);
-
-    status.textContent = "Unable to load portfolio: " + error.message;
-
-  }
-
-}
-
-function renderPortfolio() {
-
-  const table = document.getElementById("portfolioTable");
-
-  if (!table) return;
-
-  if (!portfolioItems.length) {
-
-    table.innerHTML = `
-      <tr>
-        <td colspan="6" class="empty-message">
-          Your portfolio is empty. Add a cryptocurrency from the market below.
-        </td>
-      </tr>
-    `;
-
-    document.getElementById("portfolioValue").textContent = "$0.00";
-    document.getElementById("portfolioCost").textContent = "$0.00";
-    document.getElementById("portfolioAssetCount").textContent = "0 assets";
-
-    return;
-
-  }
-
-  let totalValue = 0;
-  let totalCost = 0;
-
-  table.innerHTML = portfolioItems.map(item => {
-
-    const quantity = Number(item.quantity || 0);
-    const averagePrice = Number(item.average_buy_price || 0);
-
-    const coin = getCoin(item.coin_id);
-
-    const currentPrice = coin ? Number(coin.current_price || 0) : 0;
-
-    const value = quantity * currentPrice;
-    const cost = quantity * averagePrice;
-
-    totalValue += value;
-    totalCost += cost;
-
-    return `
-      <tr>
-
-        <td>
-          ${escapeHTML(item.name)}
-          <span class="symbol">${escapeHTML(item.symbol)}</span>
-        </td>
-
-        <td>${numberFormat(quantity)}</td>
-
-        <td>${money(averagePrice)}</td>
-
-        <td>${coin ? money(currentPrice) : "Unavailable"}</td>
-
-        <td>${coin ? money(value) : "Unavailable"}</td>
-
-        <td>
-          <button class="action-button danger-button"
-            onclick="removePortfolio('${escapeHTML(item.coin_id)}')">
-            Remove
-          </button>
-        </td>
-
-      </tr>
-    `;
-
+function renderPositions(){
+  const body=document.getElementById("positionsTable");if(!body)return;
+  if(!positions.length){body.innerHTML='<tr><td colspan="6" class="empty">You have no demo positions yet. Choose an asset above to place a simulated buy order.</td></tr>';populateTradeSelectors();return;}
+  body.innerHTML=positions.map(p=>{
+    const c=getCoin(p.coin_id),q=Number(p.quantity),avg=Number(p.average_buy_price),price=c?Number(c.current_price):null,value=price===null?null:q*price,cost=q*avg,pl=value===null?null:value-cost;
+    return `<tr><td>${escapeHTML(p.name)} <span class="symbol">${escapeHTML(p.symbol)}</span></td><td>${numberFormat(q)}</td><td>${money(avg)}</td><td>${price===null?"Unavailable":money(price)}</td><td>${value===null?"Unavailable":money(value)}</td><td class="${pl===null?"":pl>=0?"positive":"negative"}">${pl===null?"Unavailable":money(pl)}</td></tr>`;
   }).join("");
-
-  document.getElementById("portfolioValue").textContent =
-    money(totalValue);
-
-  document.getElementById("portfolioCost").textContent =
-    money(totalCost);
-
-  document.getElementById("portfolioAssetCount").textContent =
-    portfolioItems.length + " assets";
-
+  populateTradeSelectors();
 }
-
-// ADD OR UPDATE PORTFOLIO HOLDING
-
-async function addToPortfolio(coinId) {
-
-  if (!authToken) {
-    alert("Please log in before adding coins to your portfolio.");
-    document.getElementById("account").scrollIntoView();
-    return;
-  }
-
-  const coin = getCoin(coinId);
-
-  if (!coin) {
-    alert("Cryptocurrency information is unavailable.");
-    return;
-  }
-
-  const existing = portfolioItems.find(item => item.coin_id === coinId);
-
-  const quantityInput = prompt(
-    "Enter the quantity of " + coin.name + " you hold:",
-    existing ? existing.quantity : "1"
-  );
-
-  if (quantityInput === null) return;
-
-  const quantity = Number(quantityInput);
-
-  if (!Number.isFinite(quantity) || quantity <= 0) {
-    alert("Please enter a valid quantity greater than zero.");
-    return;
-  }
-
-  const averageInput = prompt(
-    "Enter your average purchase price in USD:",
-    existing ? existing.average_buy_price : coin.current_price
-  );
-
-  if (averageInput === null) return;
-
-  const averagePrice = Number(averageInput);
-
-  if (!Number.isFinite(averagePrice) || averagePrice < 0) {
-    alert("Please enter a valid purchase price.");
-    return;
-  }
-
-  try {
-
-    await apiRequest("/api/portfolio", {
-      method:"POST",
-      body:JSON.stringify({
-        coin_id:coin.id,
-        symbol:coin.symbol,
-        name:coin.name,
-        quantity:quantity,
-        average_buy_price:averagePrice
-      })
-    });
-
-    alert("Your portfolio has been updated.");
-
-    await loadPortfolio();
-
-  } catch(error) {
-
-    alert("Unable to update portfolio: " + error.message);
-
-  }
-
+function renderTransactions(items){
+  const body=document.getElementById("transactionsTable");if(!items.length){body.innerHTML='<tr><td colspan="7" class="empty">No demo trades yet.</td></tr>';return;}
+  body.innerHTML=items.map(t=>`<tr><td>${new Date(t.created_at).toLocaleString()}</td><td class="${t.transaction_type==="BUY"?"positive":"negative"}">${escapeHTML(t.transaction_type)}</td><td>${escapeHTML(t.name)} (${escapeHTML(t.symbol)})</td><td>${numberFormat(t.quantity)}</td><td>${money(t.price)}</td><td>${money(t.total)}</td><td>${t.transaction_type==="SELL"?money(t.realized_profit):"â"}</td></tr>`).join("");
 }
+async function refreshTrading(){await loadTrading();document.getElementById("tradeStatus").textContent="Trading data refreshed.";}
 
-// REMOVE PORTFOLIO HOLDING
-
-async function removePortfolio(coinId) {
-
-  if (!confirm("Remove this cryptocurrency from your portfolio?")) {
-    return;
-  }
-
-  try {
-
-    await apiRequest(
-      "/api/portfolio/" + encodeURIComponent(coinId),
-      {method:"DELETE"}
-    );
-
-    await loadPortfolio();
-
-  } catch(error) {
-
-    alert("Unable to remove asset: " + error.message);
-
-  }
-
+async function loadPortfolio(){
+  try{const d=await apiRequest("/api/portfolio");portfolioItems=Array.isArray(d)?d:d.portfolio||[];renderPortfolio();}
+  catch(err){document.getElementById("portfolioTable").innerHTML=`<tr><td colspan="6" class="empty">${escapeHTML(err.message)}</td></tr>`;}
 }
-
-// WATCHLIST
-
-async function loadWatchlist() {
-
-  const status = document.getElementById("watchlistStatus");
-
-  try {
-
-    status.textContent = "Loading your watchlist...";
-
-    const data = await apiRequest("/api/watchlist");
-
-    watchlistItems = Array.isArray(data) ? data : data.watchlist || [];
-
-    renderWatchlist();
-
-    status.textContent = "Your watchlist is up to date.";
-
-  } catch(error) {
-
-    console.error(error);
-
-    status.textContent = "Unable to load watchlist: " + error.message;
-
-  }
-
+function renderPortfolio(){
+  const body=document.getElementById("portfolioTable");if(!body)return;
+  if(!portfolioItems.length){body.innerHTML='<tr><td colspan="6" class="empty">No manual tracker holdings yet.</td></tr>';document.getElementById("portfolioValue").textContent="$0.00";document.getElementById("portfolioCost").textContent="$0.00";return;}
+  let value=0,cost=0;
+  body.innerHTML=portfolioItems.map(p=>{const q=Number(p.quantity),avg=Number(p.average_buy_price),c=getCoin(p.coin_id),price=c?Number(c.current_price):null,v=price===null?null:q*price;cost+=q*avg;if(v!==null)value+=v;return `<tr><td>${escapeHTML(p.name)} (${escapeHTML(p.symbol)})</td><td>${numberFormat(q)}</td><td>${money(avg)}</td><td>${price===null?"Unavailable":money(price)}</td><td>${v===null?"Unavailable":money(v)}</td><td><button class="action danger" onclick="removePortfolio('${escapeHTML(p.coin_id)}')">Remove</button></td></tr>`;}).join("");
+  document.getElementById("portfolioValue").textContent=money(value);document.getElementById("portfolioCost").textContent=money(cost);
 }
-
-function renderWatchlist() {
-
-  const table = document.getElementById("watchlistTable");
-
-  if (!table) return;
-
-  if (!watchlistItems.length) {
-
-    table.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty-message">
-          Your watchlist is empty. Save a cryptocurrency from the market.
-        </td>
-      </tr>
-    `;
-
-    document.getElementById("watchlistAssetCount").textContent = "0 coins";
-
-    return;
-
-  }
-
-  table.innerHTML = watchlistItems.map(item => {
-
-    const coin = getCoin(item.coin_id);
-
-    const price = coin ? money(coin.current_price) : "Unavailable";
-
-    const change = coin
-      ? Number(coin.price_change_percentage_24h || 0)
-      : null;
-
-    const changeClass = change === null
-      ? ""
-      : change >= 0 ? "positive" : "negative";
-
-    return `
-      <tr>
-
-        <td>${escapeHTML(item.name)}</td>
-
-        <td>${escapeHTML(item.symbol)}</td>
-
-        <td>${price}</td>
-
-        <td class="${changeClass}">
-          ${change === null ? "—" : change.toFixed(2) + "%"}
-        </td>
-
-        <td>
-          <button class="action-button danger-button"
-            onclick="removeFromWatchlist('${escapeHTML(item.coin_id)}')">
-            Remove
-          </button>
-        </td>
-
-      </tr>
-    `;
-
-  }).join("");
-
-  document.getElementById("watchlistAssetCount").textContent =
-    watchlistItems.length + " coins";
-
+async function addToPortfolio(id){
+  if(!authToken){alert("Please log in first.");return;}const c=getCoin(id);if(!c)return;
+  const q=prompt("Enter the quantity you want to track for "+c.name+":","1");if(q===null)return;
+  const avg=prompt("Enter average purchase price in USD:",String(c.current_price));if(avg===null)return;
+  if(!/^\d+(\.\d{1,18})?$/.test(q)||Number(q)<=0||!Number.isFinite(Number(avg))||Number(avg)<0){alert("Enter valid quantity and price.");return;}
+  try{await apiRequest("/api/portfolio",{method:"POST",body:JSON.stringify({coin_id:c.id,symbol:c.symbol,name:c.name,quantity:q,average_buy_price:String(avg)})});await loadPortfolio();alert("Portfolio tracker updated.");}
+  catch(err){alert("Unable to update tracker: "+err.message);}
 }
-
-// ADD TO WATCHLIST
-
-async function addToWatchlist(coinId) {
-
-  if (!authToken) {
-    alert("Please log in before adding coins to your watchlist.");
-    document.getElementById("account").scrollIntoView();
-    return;
-  }
-
-  const coin = getCoin(coinId);
-
-  if (!coin) {
-    alert("Cryptocurrency information is unavailable.");
-    return;
-  }
-
-  try {
-
-    await apiRequest("/api/watchlist", {
-      method:"POST",
-      body:JSON.stringify({
-        coin_id:coin.id,
-        symbol:coin.symbol,
-        name:coin.name
-      })
-    });
-
-    alert(coin.name + " added to your watchlist.");
-
-    await loadWatchlist();
-
-  } catch(error) {
-
-    alert("Unable to add coin: " + error.message);
-
-  }
-
+async function removePortfolio(id){if(!confirm("Remove this manual tracker holding?"))return;try{await apiRequest("/api/portfolio/"+encodeURIComponent(id),{method:"DELETE"});await loadPortfolio();}catch(err){alert(err.message);}}
+async function loadWatchlist(){
+  try{const d=await apiRequest("/api/watchlist");watchlistItems=Array.isArray(d)?d:d.watchlist||[];renderWatchlist();}
+  catch(err){document.getElementById("watchlistTable").innerHTML=`<tr><td colspan="5" class="empty">${escapeHTML(err.message)}</td></tr>`;}
 }
-
-// REMOVE FROM WATCHLIST
-
-async function removeFromWatchlist(coinId) {
-
-  if (!confirm("Remove this coin from your watchlist?")) {
-    return;
-  }
-
-  try {
-
-    await apiRequest(
-      "/api/watchlist/" + encodeURIComponent(coinId),
-      {method:"DELETE"}
-    );
-
-    await loadWatchlist();
-
-  } catch(error) {
-
-    alert("Unable to remove coin: " + error.message);
-
-  }
-
+function renderWatchlist(){
+  const body=document.getElementById("watchlistTable");if(!body)return;
+  if(!watchlistItems.length){body.innerHTML='<tr><td colspan="5" class="empty">Your watchlist is empty. Save an asset from the markets table.</td></tr>';return;}
+  body.innerHTML=watchlistItems.map(p=>{const c=getCoin(p.coin_id),ch=c?Number(c.price_change_percentage_24h||0):null;return `<tr><td>${escapeHTML(p.name)}</td><td>${escapeHTML(p.symbol)}</td><td>${c?money(c.current_price):"Unavailable"}</td><td class="${ch===null?"":ch>=0?"positive":"negative"}">${ch===null?"â":ch.toFixed(2)+"%"}</td><td><button class="action danger" onclick="removeFromWatchlist('${escapeHTML(p.coin_id)}')">Remove</button></td></tr>`;}).join("");
 }
-
-// INITIALIZE VELTRO
-
-async function initializeVeltro() {
-
-  await loadDashboard();
-
-  await loadCoins();
-
+async function addToWatchlist(id){
+  if(!authToken){alert("Please log in to use your watchlist.");document.getElementById("account").scrollIntoView();return;}const c=getCoin(id);if(!c)return;
+  try{const d=await apiRequest("/api/watchlist",{method:"POST",body:JSON.stringify({coin_id:c.id,symbol:c.symbol,name:c.name})});await loadWatchlist();alert(d.message);}
+  catch(err){alert("Unable to add coin: "+err.message);}
 }
+async function removeFromWatchlist(id){if(!confirm("Remove this coin from your watchlist?"))return;try{await apiRequest("/api/watchlist/"+encodeURIComponent(id),{method:"DELETE"});await loadWatchlist();}catch(err){alert(err.message);}}
 
-// START WEBSITE
-
+async function initializeVeltro(){await loadCoins();if(authToken)await loadDashboard();}
 initializeVeltro();
-
-// UPDATE MARKET DATA EVERY 60 SECONDS
-
 setInterval(loadCoins,60000);
-
 </script>
-
 </body>
 </html>
